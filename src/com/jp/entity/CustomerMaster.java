@@ -1,6 +1,6 @@
 package com.jp.entity;
 
-public class UserMaster {
+public class CustomerMaster {
 	
 	private String customerName;
 	private Integer customerMobileNo;
@@ -17,7 +17,7 @@ public class UserMaster {
 	
 	
 	
-	public UserMaster(String customerName, Integer customerMobileNo, String customerGender, String customerEmail,
+	public CustomerMaster(String customerName, Integer customerMobileNo, String customerGender, String customerEmail,
 			String customerDOB, String customerCity, String customerAddress, String customerState,
 			String customerCountry, String customerBranch, Long customerAadharId, String customerPanCard) {
 		super();
@@ -38,7 +38,7 @@ public class UserMaster {
 
 
 
-	public UserMaster() {
+	public CustomerMaster() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
