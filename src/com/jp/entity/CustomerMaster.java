@@ -1,8 +1,18 @@
 package com.jp.entity;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity(name="Customer_Master")
+@Table(name="CUSTOMER_MASTER_TBL")
 public class CustomerMaster {
 	
-	private String customerName;
+	private String customerName;	
 	private Integer customerMobileNo;
 	private String customerGender;
 	private String customerEmail;
@@ -14,28 +24,43 @@ public class CustomerMaster {
 	private String customerBranch;
 	private Long customerAadharId;
 	private String customerPanCard;
+	private String customerPhotoPath;
+	private String customerSignaturePath;
+	private CustomerDetails customerdetails;
 	
 	
-	
-	public CustomerMaster(String customerName, Integer customerMobileNo, String customerGender, String customerEmail,
-			String customerDOB, String customerCity, String customerAddress, String customerState,
-			String customerCountry, String customerBranch, Long customerAadharId, String customerPanCard) {
-		super();
-		this.customerName = customerName;
-		this.customerMobileNo = customerMobileNo;
-		this.customerGender = customerGender;
-		this.customerEmail = customerEmail;
-		this.customerDOB = customerDOB;
-		this.customerCity = customerCity;
-		this.customerAddress = customerAddress;
-		this.customerState = customerState;
-		this.customerCountry = customerCountry;
-		this.customerBranch = customerBranch;
-		this.customerAadharId = customerAadharId;
-		this.customerPanCard = customerPanCard;
-		
+	@Column(name="CUSTOMER_PHOTO_PATH")
+	public String getCustomerPhotoPath() {
+		return customerPhotoPath;
 	}
 
+
+	public void setCustomerPhotoPath(String customerPhotoPath) {
+		this.customerPhotoPath = customerPhotoPath;
+	}
+
+	@Column(name="CUSTOMER_SIGNATURE_PATH")
+	public String getCustomerSignaturePath() {
+		return customerSignaturePath;
+	}
+
+
+	public void setCustomerSignaturePath(String customerSignaturePath) {
+		this.customerSignaturePath = customerSignaturePath;
+	}
+	
+	
+	@Id	
+	@OneToOne
+	@JoinColumn(name="CUSTMER_ID")
+	public CustomerDetails getCustomerdetails() {
+		return customerdetails;
+	}
+
+
+	public void setCustomerdetails(CustomerDetails customerdetails) {
+		this.customerdetails = customerdetails;
+	}
 
 
 	public CustomerMaster() {
@@ -43,12 +68,11 @@ public class CustomerMaster {
 		// TODO Auto-generated constructor stub
 	}
 
-
-
+	
+	@Column(name="CUSTMER_NAME")
 	public String getCustomerName() {
 		return customerName;
 	}
-
 
 
 	public void setCustomerName(String customerName) {
@@ -56,7 +80,7 @@ public class CustomerMaster {
 	}
 
 
-
+	@Column(name="CUSTMER_MOBLILENO")
 	public Integer getCustomerMobileNo() {
 		return customerMobileNo;
 	}
@@ -68,7 +92,7 @@ public class CustomerMaster {
 	}
 
 
-
+	@Column(name="CUSTMER_GENDER")
 	public String getCustomerGender() {
 		return customerGender;
 	}
@@ -80,19 +104,19 @@ public class CustomerMaster {
 	}
 
 
-
+	@Column(name="CUSTMER_EMAIL")
 	public String getCustomerEmail() {
 		return customerEmail;
 	}
 
 
-
+	
 	public void setCustomerEmail(String customerEmail) {
 		this.customerEmail = customerEmail;
 	}
 
 
-
+	@Column(name="CUSTMER_DATEOFBIRTH")
 	public String getCustomerDOB() {
 		return customerDOB;
 	}
@@ -104,19 +128,19 @@ public class CustomerMaster {
 	}
 
 
-
+	@Column(name="CUSTMER_CITY")
 	public String getCustomerCity() {
 		return customerCity;
 	}
 
 
-
+	
 	public void setCustomerCity(String customerCity) {
 		this.customerCity = customerCity;
 	}
 
 
-
+	@Column(name="CUSTMER_ADDRESS")
 	public String getCustomerAddress() {
 		return customerAddress;
 	}
@@ -128,7 +152,7 @@ public class CustomerMaster {
 	}
 
 
-
+	@Column(name="CUSTMER_STATE")
 	public String getCustomerState() {
 		return customerState;
 	}
@@ -140,7 +164,7 @@ public class CustomerMaster {
 	}
 
 
-
+	@Column(name="CUSTMER_COUNTRY")
 	public String getCustomerCountry() {
 		return customerCountry;
 	}
@@ -152,7 +176,7 @@ public class CustomerMaster {
 	}
 
 
-
+	@Column(name="CUSTMER_BRANCH")
 	public String getCustomerBranch() {
 		return customerBranch;
 	}
@@ -164,7 +188,7 @@ public class CustomerMaster {
 	}
 
 
-
+	@Column(name="CUSTMER_AADHARID")
 	public Long getCustomerAadharId() {
 		return customerAadharId;
 	}
@@ -176,16 +200,19 @@ public class CustomerMaster {
 	}
 
 
-
+	@Column(name="CUSTMER_PANCARD")
 	public String getCustomerPanCard() {
 		return customerPanCard;
 	}
 
 
-
+	
 	public void setCustomerPanCard(String customerPanCard) {
 		this.customerPanCard = customerPanCard;
 	}
+	
+	
+	
 	
 	
 

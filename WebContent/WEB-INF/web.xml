@@ -2,11 +2,43 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>OnlineBanking</display-name>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>HomePage.in</welcome-file>
+    
   </welcome-file-list>
-</web-app>
+  
+  <context-param>
+	  <param-name>contextConfigLocation</param-name>
+	  <param-value>/WEB-INF/spring.xml</param-value>
+  </context-param>
+  
+  <!--it creates application context which creates a parent context  
+  By default refering to applicationcontext.xml-->
+  
+  <listener>
+  	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
+  
+  <!--it creates Webbapplication context which works as a child context
+  The child context can refer to the beans of parent context but vice versa is not possible  
+  otherwise refers to the config file named in 'contextConfigLocation' context param-->
+		 	
+		<servlet>
+			<servlet-name>fcForBank</servlet-name>
+			<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+			<!-- giving desired name to file appServlet-servlet.xml here  -->	
+			<init-param>
+				<param-name>contextConfigLocation</param-name>
+				<param-value>/WEB-INF/springWebCust.xml</param-value>
+			</init-param>	
+			<load-on-startup>1</load-on-startup>
+		</servlet>
+			
+		<servlet-mapping>
+			<servlet-name>fcForBank</servlet-name>
+			<url-pattern>*.in</url-pattern>
+		</servlet-mapping>
+		
+		
+		
+	</web-app>
