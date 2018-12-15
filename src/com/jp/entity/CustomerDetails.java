@@ -1,5 +1,7 @@
 package com.jp.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity(name="Customer_Detail")
 @Table(name="CUSTOMER_DETAILS_TBL")
-public class CustomerDetails {
+public class CustomerDetails implements Serializable{
 	
 	
 	private String custPassword;
@@ -21,7 +23,8 @@ public class CustomerDetails {
 	
 	
 	@Id
-	@OneToOne(cascade=CascadeType.ALL, mappedBy="customerdetails")	
+	@OneToOne
+	@JoinColumn(name="CUSTMER_ID")
 	public CustomerMaster getCustomermaster() {
 		return customermaster;
 	}

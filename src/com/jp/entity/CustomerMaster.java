@@ -1,5 +1,7 @@
 package com.jp.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +12,9 @@ import javax.persistence.Table;
 
 @Entity(name="Customer_Master")
 @Table(name="CUSTOMER_MASTER_TBL")
-public class CustomerMaster {
+public class CustomerMaster implements Serializable{
 	
+	private Integer customerId;
 	private String customerName;	
 	private Integer customerMobileNo;
 	private String customerGender;
@@ -22,13 +25,19 @@ public class CustomerMaster {
 	private String customerState;
 	private String customerCountry;
 	private String customerBranch;
-	private Long customerAadharId;
+	private Integer customerAadharId;
 	private String customerPanCard;
 	private String customerPhotoPath;
 	private String customerSignaturePath;
 	private CustomerDetails customerdetails;
 	
 	
+	
+	public CustomerMaster() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	@Column(name="CUSTOMER_PHOTO_PATH")
 	public String getCustomerPhotoPath() {
 		return customerPhotoPath;
@@ -49,10 +58,17 @@ public class CustomerMaster {
 		this.customerSignaturePath = customerSignaturePath;
 	}
 	
-	
-	@Id	
-	@OneToOne
-	@JoinColumn(name="CUSTMER_ID")
+	@Id
+	@Column(name="CUSTMER_ID")
+	public Integer getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
+	}
+
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="customermaster")
 	public CustomerDetails getCustomerdetails() {
 		return customerdetails;
 	}
@@ -63,11 +79,7 @@ public class CustomerMaster {
 	}
 
 
-	public CustomerMaster() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
+	
 	
 	@Column(name="CUSTMER_NAME")
 	public String getCustomerName() {
@@ -189,13 +201,15 @@ public class CustomerMaster {
 
 
 	@Column(name="CUSTMER_AADHARID")
-	public Long getCustomerAadharId() {
+	public Integer getCustomerAadharId() {
 		return customerAadharId;
 	}
 
 
 
-	public void setCustomerAadharId(Long customerAadharId) {
+	
+
+	public void setCustomerAadharId(Integer customerAadharId) {
 		this.customerAadharId = customerAadharId;
 	}
 
@@ -209,6 +223,17 @@ public class CustomerMaster {
 	
 	public void setCustomerPanCard(String customerPanCard) {
 		this.customerPanCard = customerPanCard;
+	}
+	
+	@Override
+	public String toString() {
+		return "CustomerMaster [customerId=" + customerId + ", customerName=" + customerName + ", customerMobileNo="
+				+ customerMobileNo + ", customerGender=" + customerGender + ", customerEmail=" + customerEmail
+				+ ", customerDOB=" + customerDOB + ", customerCity=" + customerCity + ", customerAddress="
+				+ customerAddress + ", customerState=" + customerState + ", customerCountry=" + customerCountry
+				+ ", customerBranch=" + customerBranch + ", customerAadharId=" + customerAadharId + ", customerPanCard="
+				+ customerPanCard + ", customerPhotoPath=" + customerPhotoPath + ", customerSignaturePath="
+				+ customerSignaturePath + ", customerdetails=" + customerdetails + "]";
 	}
 	
 	

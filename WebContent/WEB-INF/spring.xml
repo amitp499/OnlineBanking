@@ -14,20 +14,20 @@
    
   
  	
- 	<context:component-scan base-package="com.jp.hr.services" /> 
- 	<context:component-scan base-package="com.jp.hr.daos" />  
+ 	<context:component-scan base-package="com.jp.services" /> 
+ 	<context:component-scan base-package="com.jp.daos" />  
  	
  	
 	<bean id="ds"
         class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
     <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
-    <property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/>
+    <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
     <property name="username" value="hr"/>
     <property name="password" value="hr"/>
     </bean>
     
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="packagesToScan" value="com.jp.hr.entities" />
+		<property name="packagesToScan" value="com.jp.entity" />
 		<property name="dataSource" ref="ds" />
 		
 		<property name="jpaVendorAdapter">
