@@ -54,10 +54,10 @@ public class WebController {
 		cm.setCustomerSignaturePath("jhkh");
 		cm.setCustomerState("MH");
 		
+		
 		cd.setCustomermaster(cm);
 		cm.setCustomerdetails(cd);
 		
-		//on.addNewCustoer(cm);
 		on.addNewCustoer(cd);
 		return "homePage";
 	}

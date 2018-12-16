@@ -41,11 +41,7 @@ public class CustomerDetails implements Serializable{
 	}
 
 
-	
-	
-	
-	@OneToOne(cascade=CascadeType.ALL)
-	@PrimaryKeyJoinColumn
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="customerdetails")
 	public CustomerMaster getCustomermaster() {
 		return customermaster;
 	}
