@@ -25,8 +25,7 @@ public class CustomerDetails implements Serializable{
 	private String customerFullName;
 	private String role;
 	
-	@OneToOne( mappedBy="customerDetails",cascade=CascadeType.ALL)
-	@JoinColumn(name="CUSTMER_ID", referencedColumnName="CUSTMER_ID")
+	
 	private CustomerMaster customermaster;
 	
 	
@@ -45,7 +44,8 @@ public class CustomerDetails implements Serializable{
 	
 	
 	
-	
+	@OneToOne(cascade=CascadeType.ALL)
+	@PrimaryKeyJoinColumn
 	public CustomerMaster getCustomermaster() {
 		return customermaster;
 	}

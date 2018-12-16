@@ -32,12 +32,12 @@ public class CustomerMaster implements Serializable{
 	private Integer customerAadharId;
 	private String customerPanCard;
 	private String customerPhotoPath;
+	private Integer customerDetailId;
 	private String customerSignaturePath;
 	
 	
-	@OneToOne(cascade=CascadeType.ALL, mappedBy="customermaster")
-	@JoinColumn(name="CUSTOMERDETAIL_ID", referencedColumnName="CUSTOMERDETAIL_ID")
-	private CustomerDetails customerDetails;
+	
+	private CustomerDetails customerdetails;
 	
 	
 	
@@ -45,6 +45,17 @@ public class CustomerMaster implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	@Column(name="CUSTOMERDETAIL_ID")
+	public Integer getCustomerDetailId() {
+		return customerDetailId;
+	}
+
+
+	public void setCustomerDetailId(Integer customerDetailId) {
+		this.customerDetailId = customerDetailId;
+	}
+
 
 	@Column(name="CUSTOMER_PHOTO_PATH")
 	public String getCustomerPhotoPath() {
@@ -77,14 +88,15 @@ public class CustomerMaster implements Serializable{
 	}
 
 	
-
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="customermaster")
+	@JoinColumn(name="CUSTOMERDETAIL_ID", referencedColumnName="CUSTOMERDETAIL_ID")
 	public CustomerDetails getCustomerdetails() {
-		return customerDetails;
+		return customerdetails;
 	}
 
 
 	public void setCustomerdetails(CustomerDetails customerdetails) {
-		this.customerDetails = customerdetails;
+		this.customerdetails = customerdetails;
 	}
 
 
@@ -242,7 +254,7 @@ public class CustomerMaster implements Serializable{
 				+ customerAddress + ", customerState=" + customerState + ", customerCountry=" + customerCountry
 				+ ", customerBranch=" + customerBranch + ", customerAadharId=" + customerAadharId + ", customerPanCard="
 				+ customerPanCard + ", customerPhotoPath=" + customerPhotoPath + ", customerSignaturePath="
-				+ customerSignaturePath + ", customerdetails=" + customerDetails + "]";
+				+ customerSignaturePath + ", customerdetails=" + customerdetails + "]";
 	}*/
 	
 	

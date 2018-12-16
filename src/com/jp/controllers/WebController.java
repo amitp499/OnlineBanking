@@ -57,8 +57,8 @@ public class WebController {
 		cd.setCustomermaster(cm);
 		cm.setCustomerdetails(cd);
 		
-		on.addNewCustoer(cm);
-		//on.addNewCustoer(cd);
+		//on.addNewCustoer(cm);
+		on.addNewCustoer(cd);
 		return "homePage";
 	}
 }

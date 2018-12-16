@@ -34,7 +34,8 @@ public class OnlineBankingDaoImpl implements IOnlineBankingDao{
 	public void addNewCustoer(CustomerMaster cm) {
 		//boolean custAdd=false;
 		System.out.println("reached");
-		//System.out.println(cm.getCustomerdetails().getCustomerDetailsId());
+		System.out.println(cm);
+		System.out.println(cm.getCustomerdetails().getCustomerDetailsId());
 		entityManager.persist(cm);
 		
 	}
