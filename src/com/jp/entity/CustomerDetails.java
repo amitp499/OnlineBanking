@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 
@@ -15,16 +16,36 @@ import javax.persistence.Table;
 @Table(name="CUSTOMER_DETAILS_TBL")
 public class CustomerDetails implements Serializable{
 	
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4580059503230646675L;
+	private Integer customerDetailsId;
 	private String custPassword;
 	private String customerFullName;
 	private String role;
+	
+	@OneToOne( mappedBy="customerDetails",cascade=CascadeType.ALL)
+	@JoinColumn(name="CUSTMER_ID", referencedColumnName="CUSTMER_ID")
 	private CustomerMaster customermaster;
 	
 	
 	@Id
-	@OneToOne
-	@JoinColumn(name="CUSTMER_ID")
+	@Column(name="CUSTOMERDETAIL_ID")
+	public Integer getCustomerDetailsId() {
+		return customerDetailsId;
+	}
+
+
+	public void setCustomerDetailsId(Integer customerDetailsId) {
+		this.customerDetailsId = customerDetailsId;
+	}
+
+
+	
+	
+	
+	
 	public CustomerMaster getCustomermaster() {
 		return customermaster;
 	}
@@ -74,8 +95,16 @@ public class CustomerDetails implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
+
+	/*@Override
+	public String toString() {
+		return "CustomerDetails [customerDetailsId=" + customerDetailsId + ", custPassword=" + custPassword
+				+ ", customerFullName=" + customerFullName + ", role=" + role + ", customermaster=" + customermaster
+				+ "]";
+	}*/
+
+
 	
 	
 	

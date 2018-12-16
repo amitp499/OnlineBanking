@@ -14,6 +14,10 @@ import javax.persistence.Table;
 @Table(name="CUSTOMER_MASTER_TBL")
 public class CustomerMaster implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6471386886575838136L;
 	private Integer customerId;
 	private String customerName;	
 	private Integer customerMobileNo;
@@ -29,7 +33,11 @@ public class CustomerMaster implements Serializable{
 	private String customerPanCard;
 	private String customerPhotoPath;
 	private String customerSignaturePath;
-	private CustomerDetails customerdetails;
+	
+	
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="customermaster")
+	@JoinColumn(name="CUSTOMERDETAIL_ID", referencedColumnName="CUSTOMERDETAIL_ID")
+	private CustomerDetails customerDetails;
 	
 	
 	
@@ -68,14 +76,15 @@ public class CustomerMaster implements Serializable{
 		this.customerId = customerId;
 	}
 
-	@OneToOne(cascade=CascadeType.ALL, mappedBy="customermaster")
+	
+
 	public CustomerDetails getCustomerdetails() {
-		return customerdetails;
+		return customerDetails;
 	}
 
 
 	public void setCustomerdetails(CustomerDetails customerdetails) {
-		this.customerdetails = customerdetails;
+		this.customerDetails = customerdetails;
 	}
 
 
@@ -225,7 +234,7 @@ public class CustomerMaster implements Serializable{
 		this.customerPanCard = customerPanCard;
 	}
 	
-	@Override
+	/*@Override
 	public String toString() {
 		return "CustomerMaster [customerId=" + customerId + ", customerName=" + customerName + ", customerMobileNo="
 				+ customerMobileNo + ", customerGender=" + customerGender + ", customerEmail=" + customerEmail
@@ -233,8 +242,8 @@ public class CustomerMaster implements Serializable{
 				+ customerAddress + ", customerState=" + customerState + ", customerCountry=" + customerCountry
 				+ ", customerBranch=" + customerBranch + ", customerAadharId=" + customerAadharId + ", customerPanCard="
 				+ customerPanCard + ", customerPhotoPath=" + customerPhotoPath + ", customerSignaturePath="
-				+ customerSignaturePath + ", customerdetails=" + customerdetails + "]";
-	}
+				+ customerSignaturePath + ", customerdetails=" + customerDetails + "]";
+	}*/
 	
 	
 	
