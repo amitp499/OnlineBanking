@@ -7,9 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity(name="Accounts")
-@Table(name="Accounts")
+@Table(name="Accounts_TBL")
+
 public abstract class Accounts implements Serializable{
 	
+	private static final long serialVersionUID = 4059544898404831586L;
+
+
 	@Column(name="ACCOUNT_ID")
 	private Integer accountId;
 	
