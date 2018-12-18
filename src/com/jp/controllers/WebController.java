@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jp.daos.IOnlineBankingDao;
 import com.jp.daos.OnlineBankingDaoImpl;
-import com.jp.entity.CustomerDetails;
 import com.jp.entity.CustomerMaster;
+import com.jp.entity.CustomerDetail;
+import com.jp.exceptions.OnlineBankingException;
 
 @Controller
 public class WebController {
@@ -28,37 +29,40 @@ public class WebController {
 	public String customerRegistration(){
 		
 
-		CustomerDetails cd = new CustomerDetails();
 		CustomerMaster cm = new CustomerMaster();
+		CustomerDetail cd = new CustomerDetail();
 		
-		cd.setCustomerDetailsId(1235);
-		cd.setCustomerFullName("Ait");
-		cd.setCustPassword("abcd");
-		cd.setRole("customer");
+		cm.setUserId(123456);
+		
+		cm.setCustPassword("abcd");
+		cm.setRole("customer");
+				
+		cd.setCustomerId(9817548);
+		cd.setCustomerAadharId(1985471);
+		cd.setCustomerAddress("Mubai");
+		cd.setCustomerBranch("Andheri");
+		cd.setCustomerCity("Thane");
+		cd.setCustomerCountry("India");
+		cd.setCustomerDOB("17-Sep-1987");
+		cd.setCustomerEmail("amitp@gail.co");
+		cd.setCustomerGender("Male");
+		cd.setCustomerMobileNo(80825);
+		cd.setCustomerName("Ait");
+		cd.setCustomerPanCard("6532514");
+		cd.setCustomerPhotoPath("sadsf");
+		cd.setCustomerSignaturePath("jhkh");
+		cd.setCustomerState("MH");
 		
 		
+		cm.setCustomermaster(cd);
+		cd.setCustomerdetails(cm);
 		
-		cm.setCustomerId(9817548);
-		cm.setCustomerAadharId(1985471);
-		cm.setCustomerAddress("Mubai");
-		cm.setCustomerBranch("Andheri");
-		cm.setCustomerCity("Thane");
-		cm.setCustomerCountry("India");
-		cm.setCustomerDOB("17-Sep-1987");
-		cm.setCustomerEmail("amitp@gail.co");
-		cm.setCustomerGender("Male");
-		cm.setCustomerMobileNo(80825);
-		cm.setCustomerName("Ait");
-		cm.setCustomerPanCard("6532514");
-		cm.setCustomerPhotoPath("sadsf");
-		cm.setCustomerSignaturePath("jhkh");
-		cm.setCustomerState("MH");
-		
-		
-		cd.setCustomermaster(cm);
-		cm.setCustomerdetails(cd);
-		
-		on.addNewCustoer(cd);
+		try {
+			on.addNewCustoer(cm);
+		} catch (OnlineBankingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "homePage";
 	}
 }

@@ -54,5 +54,34 @@ create table CUSTOMER_MASTER_TBL (
         delete from CUSTOMER_MASTER_TBL where CUSTMER_ID=9817547
         
         
+         create table CUSTOMER_MASTER_TBL (
+        USER_ID number(10) primary key,              
+        ROLE varchar2(10) not null,
+        CUSTOMER_PASSWORD varchar2(50) not null,
+        CUSTOMER_ID number(10),
+        foreign key(CUSTOMER_ID) REFERENCES CUSTOMER_DETAILS_TBL(CUSTOMER_ID)
+        );
+
+create table CUSTOMER_DETAILS_TBL (
+        CUSTOMER_ID number(10) primary key,
+        CUSTOMER_NAME varchar2(30) not null,
+        CUSTOMER_MOBLILENO number(10) unique,        
+        CUSTOMER_GENDER varchar2(10) not null,
+        CUSTOMER_EMAIL varchar2(50) not null,
+        CUSTOMER_DATEOFBIRTH date not null,
+        CUSTOMER_CITY varchar2(30) not null,
+        CUSTOMER_ADDRESS varchar2(30) not null,
+        CUSTOMER_STATE varchar2(30) not null,
+        CUSTOMER_COUNTRY varchar2(30) not null,
+        CUSTOMER_BRANCH varchar2(30) not null,
+        CUSTOMER_AADHARID number(20) unique,
+        CUSTOMER_PANCARD varchar2(20) unique,
+        CUSTOMER_PHOTO_PATH varchar2(30) not null,
+        CUSTOMER_SIGNATURE_PATH varchar2(30) not null        
+        );
+        COMMIT;
+   
+        
+        
 
 
