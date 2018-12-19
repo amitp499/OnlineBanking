@@ -53,7 +53,7 @@ create table CUSTOMER_MASTER_TBL (
         commit;
         delete from CUSTOMER_MASTER_TBL where CUSTMER_ID=9817547
         
-        
+        //new
          create table CUSTOMER_MASTER_TBL (
         USER_ID number(10) primary key,              
         ROLE varchar2(10) not null,
@@ -82,10 +82,10 @@ create table CUSTOMER_DETAILS_TBL (
         COMMIT;
         
         create table ACCOUNTS_TBL (
-        USER_ID number(10) primary key,              
+        USER_ID number(10) ,              
         ACCOUNT_TYPE varchar2(10) not null,
         ACCOUNT_BALANCE  number(12,2),
-        ACCOUNT_ID number(10),
+        ACCOUNT_ID number(10) primary key,
         foreign key(USER_ID) REFERENCES CUSTOMER_MASTER_TBL(USER_ID)
         );
         commit;

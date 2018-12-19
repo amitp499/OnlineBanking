@@ -1,5 +1,8 @@
 package com.jp.controllers;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -8,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.jp.daos.IOnlineBankingDao;
 import com.jp.daos.OnlineBankingDaoImpl;
 import com.jp.entity.CustomerMaster;
+import com.jp.entity.SavingsAccount;
+import com.jp.entity.Accounts;
+import com.jp.entity.CreditCardAccount;
 import com.jp.entity.CustomerDetail;
 import com.jp.exceptions.OnlineBankingException;
 
@@ -21,14 +27,40 @@ public class WebController {
 	@RequestMapping("HomePage.in")
 	public String displayHomePage(){
 		
-		System.out.println("entered");
+		//System.out.println("entered");
 		return "homePage";
 	}
 	
 	@RequestMapping("CustomerRegistration.in")
 	public String customerRegistration(){
 		
-
+		try {
+			
+		//Add Savings Account
+		SavingsAccount sb = new SavingsAccount();		
+					
+		sb.setAccountBalance(500.00);
+		sb.setAccountId(545453343);
+		sb.setCustomerMaster(on.serachUserIdCustomerMaster(12345));				
+		on.addAccount(sb);
+			
+			
+			//Add Savings Account		
+		/*CreditCardAccount cca = new CreditCardAccount();
+		cca.setAccountBalance(1500.00);
+		cca.setAccountId(23454534);
+		cca.setCustomerMaster(on.serachUserIdCustomerMaster(12345));				
+		on.addAccount(cca);
+		*/
+		} catch (OnlineBankingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+	//New Registration 
+		/*
 		CustomerMaster cm = new CustomerMaster();
 		CustomerDetail cd = new CustomerDetail();
 		
@@ -62,7 +94,11 @@ public class WebController {
 		} catch (OnlineBankingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
+		
+		
+		
+		
 		return "homePage";
 	}
 }

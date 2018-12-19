@@ -1,14 +1,15 @@
 package com.jp.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 
@@ -16,39 +17,47 @@ import javax.persistence.Table;
 @Table(name="CUSTOMER_MASTER_TBL")
 public class CustomerMaster implements Serializable{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4580059503230646675L;
+	static final long serialVersionUID = -4580059503230646675L;
 	private Integer userId;
 	private String custPassword;
-	private Integer customerId;
-	private String role;
-	
-	
+	//private Integer customerId;
+	private String role;		
 	private CustomerDetail customermaster;
+	private Set<Accounts> account;
 	
 	
+	@OneToMany(mappedBy="customerMaster", cascade=CascadeType.ALL)
+	public Set<Accounts> getAccount() {
+		return account;
+	}
+
+
+	public void setAccount(Set<Accounts> account) {
+		this.account = account;
+	}
+
+
 	@Id
 	@Column(name="USER_ID")
 	public Integer getUserId() {
 		return userId;
 	}
 
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 
-	public Integer getCustomerId() {
+	/*public Integer getCustomerId() {
 		return customerId;
 	}
 
 
 	public void setCustomerId(Integer customerId) {
 		this.customerId = customerId;
-	}
+	}*/
 
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
+	
 
 
 
@@ -110,13 +119,14 @@ public class CustomerMaster implements Serializable{
 	}
 
 
-	/*@Override
+	@Override
 	public String toString() {
-		return "CustomerDetails [customerDetailsId=" + customerDetailsId + ", custPassword=" + custPassword
-				+ ", customerFullName=" + customerFullName + ", role=" + role + ", customermaster=" + customermaster
-				+ "]";
-	}*/
+		return "CustomerMaster [userId=" + userId + ", custPassword=" + custPassword + 
+				" role=" + role + ", customermaster=" + customermaster + ", account=" + account + "]";
+	}
 
+
+	
 
 	
 	
