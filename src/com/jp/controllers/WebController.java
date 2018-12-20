@@ -34,6 +34,7 @@ public class WebController {
 	@RequestMapping("CustomerRegistration.in")
 	public String customerRegistration(){
 		
+		/*
 		try {
 			
 		//Add Savings Account
@@ -46,16 +47,17 @@ public class WebController {
 			
 			
 			//Add Savings Account		
-		/*CreditCardAccount cca = new CreditCardAccount();
+		CreditCardAccount cca = new CreditCardAccount();
 		cca.setAccountBalance(1500.00);
 		cca.setAccountId(23454534);
 		cca.setCustomerMaster(on.serachUserIdCustomerMaster(12345));				
 		on.addAccount(cca);
-		*/
+		
 		} catch (OnlineBankingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
 		
 		
 		
@@ -95,6 +97,8 @@ public class WebController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
+		
+		
 		
 		
 		
