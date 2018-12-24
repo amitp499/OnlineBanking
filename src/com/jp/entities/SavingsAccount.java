@@ -1,4 +1,4 @@
-package com.jp.entity;
+package com.jp.entities;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;

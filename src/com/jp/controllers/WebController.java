@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jp.daos.IOnlineBankingDao;
 import com.jp.daos.OnlineBankingDaoImpl;
-import com.jp.entity.CustomerMaster;
-import com.jp.entity.SavingsAccount;
-import com.jp.entity.Accounts;
-import com.jp.entity.CreditCardAccount;
-import com.jp.entity.CustomerDetail;
+import com.jp.entities.Accounts;
+import com.jp.entities.CreditCardAccount;
+import com.jp.entities.CustomerDetail;
+import com.jp.entities.CustomerMaster;
+import com.jp.entities.SavingsAccount;
 import com.jp.exceptions.OnlineBankingException;
 
 @Controller

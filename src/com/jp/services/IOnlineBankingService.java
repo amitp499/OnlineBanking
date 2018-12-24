@@ -1,7 +1,7 @@
 package com.jp.services;
 
-import com.jp.entity.Accounts;
-import com.jp.entity.CustomerMaster;
+import com.jp.entities.Accounts;
+import com.jp.entities.CustomerMaster;
 import com.jp.exceptions.OnlineBankingException;
 
 public interface IOnlineBankingService {

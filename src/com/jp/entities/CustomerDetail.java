@@ -1,13 +1,15 @@
-package com.jp.entity;
+package com.jp.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -31,11 +33,36 @@ public class CustomerDetail implements Serializable{
 	private Integer customerAadharId;
 	private String customerPanCard;
 	private String customerPhotoPath;
-	
 	private String customerSignaturePath;
+	private CustomerMaster customermaster;
+	private Set<Accounts> account;
+	private Set<BeneficiaryDetails> beneficiaryDetails;
+	
+
 	
 	
-	private CustomerMaster customerdetails;
+	
+	
+	@OneToMany(mappedBy="customerDetail", cascade=CascadeType.ALL)
+	public Set<BeneficiaryDetails> getBeneficiaryDetails() {
+		return beneficiaryDetails;
+	}
+
+
+	public void setBeneficiaryDetails(Set<BeneficiaryDetails> beneficiaryDetails) {
+		this.beneficiaryDetails = beneficiaryDetails;
+	}
+
+
+	@OneToMany(mappedBy="customerDetail", cascade=CascadeType.ALL)
+	public Set<Accounts> getAccount() {
+		return account;
+	}
+
+
+	public void setAccount(Set<Accounts> account) {
+		this.account = account;
+	}
 		
 	
 	public CustomerDetail() {
@@ -78,15 +105,16 @@ public class CustomerDetail implements Serializable{
 
 	
 	
-	@OneToOne(cascade=CascadeType.ALL, mappedBy="customermaster")
-	public CustomerMaster getCustomerdetails() {
-		return customerdetails;
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="customerdetail")
+	public CustomerMaster getCustomermaster() {
+		return customermaster;
 	}
 
 
-	public void setCustomerdetails(CustomerMaster customerdetails) {
-		this.customerdetails = customerdetails;
+	public void setCustomermaster(CustomerMaster customermaster) {
+		this.customermaster = customermaster;
 	}
+
 
 	
 	@Column(name="CUSTOMER_NAME")
@@ -94,6 +122,8 @@ public class CustomerDetail implements Serializable{
 		return customerName;
 	}
 
+
+	
 
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;

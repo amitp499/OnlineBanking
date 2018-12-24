@@ -7,8 +7,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jp.daos.IOnlineBankingDao;
-import com.jp.entity.Accounts;
-import com.jp.entity.CustomerMaster;
+import com.jp.entities.Accounts;
+import com.jp.entities.CustomerMaster;
 import com.jp.exceptions.OnlineBankingException;
 
 @Service("service")

@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jp.entity.CustomerMaster;
-import com.jp.entity.Accounts;
-import com.jp.entity.CustomerDetail;
+import com.jp.entities.Accounts;
+import com.jp.entities.CustomerDetail;
+import com.jp.entities.CustomerMaster;
 import com.jp.exceptions.OnlineBankingException;
 
 
@@ -30,7 +30,7 @@ public class OnlineBankingDaoImpl implements IOnlineBankingDao{
 		
 		
 		entityManager.persist(cm);		
-		if (entityManager.find(CustomerMaster.class, cm.getUserId())!=null){
+		if (entityManager.find(CustomerMaster.class, cm.getLoginId())!=null){
 			
 			addCustomerFlag=true;
 			
@@ -45,7 +45,7 @@ public class OnlineBankingDaoImpl implements IOnlineBankingDao{
 		System.out.println(ac);
 		entityManager.persist(ac);
 		
-		if (entityManager.find(Accounts.class, ac.getAccountId())!=null){
+		if (entityManager.find(Accounts.class, ac.getAccountNo())!=null){
 			
 			addAccountFlag=true;
 			

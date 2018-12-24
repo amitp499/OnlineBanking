@@ -1,18 +1,19 @@
-package com.jp.entity;
+package com.jp.entities;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity(name="Accounts")
@@ -25,31 +26,43 @@ public abstract class Accounts implements Serializable{
 
 	
 	
-	private Integer accountId;
-	
-	
-//	private Integer userId;
-	
+	private Integer accountNo;
 	
 	private Double accountBalance;	
 	
-	private CustomerMaster customerMaster;
+	private CustomerDetail customerDetail;
 	
-	@ManyToOne
-	@JoinColumn(name="USER_ID", referencedColumnName="USER_ID")
-	public CustomerMaster getCustomerMaster() {
-		return customerMaster;
+	private Set<Transactions> transactions;
+	
+	
+
+
+	@OneToMany(mappedBy="accounts",  cascade=CascadeType.ALL)
+	public Set<Transactions> getTransactions() {
+		return transactions;
 	}
 
 
-	public void setCustomerMaster(CustomerMaster customerMaster) {
-		this.customerMaster = customerMaster;
+	public void setTransactions(Set<Transactions> transactions) {
+		this.transactions = transactions;
+	}
+
+
+	@ManyToOne
+	@JoinColumn(name="CUSTOMER_ID", referencedColumnName="CUSTOMER_ID")
+	public CustomerDetail getCustomerDetail() {
+		return customerDetail;
+	}
+
+
+	public void setCustomerDetail(CustomerDetail customerDetail) {
+		this.customerDetail = customerDetail;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Accounts [accountId=" + accountId +  ", accountBalance=" + accountBalance
+		return "Accounts [accountId=" + accountNo +  ", accountBalance=" + accountBalance
 				+ "]";
 	}
 
@@ -59,13 +72,13 @@ public abstract class Accounts implements Serializable{
 	}
 	
 	@Id
-	@Column(name="ACCOUNT_ID")
-	public Integer getAccountId() {
-		return accountId;
+	@Column(name="ACCOUNT_NO")
+	public Integer getAccountNo() {
+		return accountNo;
 	}
 	
-	public void setAccountId(Integer accountId) {
-		this.accountId = accountId;
+	public void setAccountNo(Integer accountNo) {
+		this.accountNo = accountNo;
 	}
 	
 	

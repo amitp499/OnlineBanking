@@ -1,4 +1,4 @@
-package com.jp.entity;
+package com.jp.entities;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -18,43 +18,23 @@ import javax.persistence.Table;
 public class CustomerMaster implements Serializable{
 	
 	static final long serialVersionUID = -4580059503230646675L;
-	private Integer userId;
+	private Integer loginId;
 	private String custPassword;
-	//private Integer customerId;
 	private String role;		
-	private CustomerDetail customermaster;
-	private Set<Accounts> account;
+	private CustomerDetail customerdetail;
 	
-	
-	@OneToMany(mappedBy="customerMaster", cascade=CascadeType.ALL)
-	public Set<Accounts> getAccount() {
-		return account;
-	}
-
-
-	public void setAccount(Set<Accounts> account) {
-		this.account = account;
-	}
 
 
 	@Id
-	@Column(name="USER_ID")
-	public Integer getUserId() {
-		return userId;
+	@Column(name="LOGIN_ID")
+	public Integer getLoginId() {
+		return loginId;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setLoginId(Integer loginId) {
+		this.loginId = loginId;
 	}
 
-	/*public Integer getCustomerId() {
-		return customerId;
-	}
-
-
-	public void setCustomerId(Integer customerId) {
-		this.customerId = customerId;
-	}*/
 
 
 	
@@ -64,15 +44,15 @@ public class CustomerMaster implements Serializable{
 
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="CUSTOMER_ID", referencedColumnName="CUSTOMER_ID")
-	public CustomerDetail getCustomermaster() {
-		return customermaster;
+	public CustomerDetail getCustomerdetail() {
+		return customerdetail;
 	}
 
 
 	
 
-	public void setCustomermaster(CustomerDetail customermaster) {
-		this.customermaster = customermaster;
+	public void setCustomerdetail(CustomerDetail customerdetail) {
+		this.customerdetail = customerdetail;
 	}
 	
 	
@@ -121,8 +101,8 @@ public class CustomerMaster implements Serializable{
 
 	@Override
 	public String toString() {
-		return "CustomerMaster [userId=" + userId + ", custPassword=" + custPassword + 
-				" role=" + role + ", customermaster=" + customermaster + ", account=" + account + "]";
+		return "CustomerMaster [loginId=" + loginId + ", custPassword=" + custPassword + 
+				" role=" + role + ", customerdetail=" + customerdetail + "]";
 	}
 
 
