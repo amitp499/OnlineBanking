@@ -7,10 +7,13 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity(name="Customer_Detail")
@@ -93,8 +96,10 @@ public class CustomerDetail implements Serializable{
 		this.customerSignaturePath = customerSignaturePath;
 	}
 	
+	@SequenceGenerator(name="customer_id_seq", initialValue=5000,allocationSize=75)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="customer_id_seq")
 	@Id
-	@Column(name="CUSTOMER_ID")
+	@Column(name="CUSTOMER_ID")	
 	public Integer getCustomerId() {
 		return customerId;
 	}

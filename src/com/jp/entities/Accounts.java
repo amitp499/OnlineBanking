@@ -8,12 +8,15 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity(name="Accounts")
@@ -71,6 +74,8 @@ public abstract class Accounts implements Serializable{
 		
 	}
 	
+	@SequenceGenerator(name="account_no_seq", initialValue=10254887,allocationSize=21)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="account_no_seq")
 	@Id
 	@Column(name="ACCOUNT_NO")
 	public Integer getAccountNo() {

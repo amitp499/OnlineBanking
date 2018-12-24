@@ -3,9 +3,12 @@ package com.jp.entities;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity(name="Transaction")
@@ -22,7 +25,8 @@ public class Transactions {
 	private Double balance;
 	private Accounts accounts;
 	
-		
+	@SequenceGenerator(name="transaction_id_seq", initialValue=268887,allocationSize=33)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="transaction_id_seq")	
 	@Id
 	@Column(name="TRANSACTION_ID")
 	public Integer getTransactionId() {

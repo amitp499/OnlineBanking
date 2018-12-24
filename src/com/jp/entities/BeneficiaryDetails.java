@@ -2,9 +2,12 @@ package com.jp.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity(name="Beneficiary")
@@ -24,6 +27,8 @@ public class BeneficiaryDetails {
 		
 	}
 	
+	@SequenceGenerator(name="beneficiary_id_seq", initialValue=35000,allocationSize=60)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="beneficiary_id_seq")
 	@Id
 	@Column(name="BENEFICIARY_ID")
 	public Integer getBeneficiaryId() {
