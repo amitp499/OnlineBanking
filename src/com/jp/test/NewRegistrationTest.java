@@ -1,5 +1,7 @@
 package com.jp.test;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,7 @@ import com.jp.exceptions.OnlineBankingException;
 import com.jp.services.IOnlineBankingService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/WEB-INF/spring.xml")
+@ContextConfiguration({	"file:WebContent/WEB-INF/spring.xml", "file:WebContent/WEB-INF/springWebCust.xml"})
 public class NewRegistrationTest {
 	
 	@Autowired
@@ -27,13 +29,12 @@ public class NewRegistrationTest {
 		CustomerMaster cm = new CustomerMaster();
 		CustomerDetail cd = new CustomerDetail();
 		
-		cm.setLoginId(123456);
 		
 		cm.setCustPassword("abcd");
 		cm.setRole("customer");
 				
-		cd.setCustomerId(9817548);
-		cd.setCustomerAadharId(1985471);
+	
+		cd.setCustomerAadharId(2980471);
 		cd.setCustomerAddress("Mubai");
 		cd.setCustomerBranch("Andheri");
 		cd.setCustomerCity("Thane");
@@ -41,23 +42,27 @@ public class NewRegistrationTest {
 		cd.setCustomerDOB("17-Sep-1987");
 		cd.setCustomerEmail("amitp@gail.co");
 		cd.setCustomerGender("Male");
-		cd.setCustomerMobileNo(80825);
+		cd.setCustomerMobileNo(8082295);
 		cd.setCustomerName("Ait");
-		cd.setCustomerPanCard("6532514");
+		cd.setCustomerPanCard("Q6532534");
 		cd.setCustomerPhotoPath("sadsf");
 		cd.setCustomerSignaturePath("jhkh");
 		cd.setCustomerState("MH");
 		
 		
-		cm.setCustomermaster(cd);
-		cd.setCustomerdetails(cm);
-		
+		cm.setCustomerdetail(cd);
+		cd.setCustomermaster(cm);
+		//System.out.println(cd);
+		//System.out.println(cm);
 		try {
-			on.addNewCustoer(cm);
+			//Ios.registerNewCustoer(cm);
+			assertTrue(Ios.registerNewCustoer(cm));
 		} catch (OnlineBankingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
+		
+		
 	}
 	
 	

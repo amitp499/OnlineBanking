@@ -96,7 +96,7 @@ public class CustomerDetail implements Serializable{
 		this.customerSignaturePath = customerSignaturePath;
 	}
 	
-	@SequenceGenerator(name="customer_id_seq", initialValue=5000,allocationSize=75)
+	@SequenceGenerator(name="customer_id_seq",sequenceName="customer_id_seq", initialValue=5000,allocationSize=75)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="customer_id_seq")
 	@Id
 	@Column(name="CUSTOMER_ID")	
@@ -110,10 +110,13 @@ public class CustomerDetail implements Serializable{
 
 	
 	
+	
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="customerdetail")
 	public CustomerMaster getCustomermaster() {
 		return customermaster;
 	}
+
+
 
 
 	public void setCustomermaster(CustomerMaster customermaster) {
@@ -127,8 +130,6 @@ public class CustomerDetail implements Serializable{
 		return customerName;
 	}
 
-
-	
 
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
@@ -265,17 +266,22 @@ public class CustomerDetail implements Serializable{
 	public void setCustomerPanCard(String customerPanCard) {
 		this.customerPanCard = customerPanCard;
 	}
-	
-	/*@Override
+
+
+
+
+	@Override
 	public String toString() {
-		return "CustomerMaster [customerId=" + customerId + ", customerName=" + customerName + ", customerMobileNo="
+		return "CustomerDetail [customerId=" + customerId + ", customerName=" + customerName + ", customerMobileNo="
 				+ customerMobileNo + ", customerGender=" + customerGender + ", customerEmail=" + customerEmail
 				+ ", customerDOB=" + customerDOB + ", customerCity=" + customerCity + ", customerAddress="
 				+ customerAddress + ", customerState=" + customerState + ", customerCountry=" + customerCountry
 				+ ", customerBranch=" + customerBranch + ", customerAadharId=" + customerAadharId + ", customerPanCard="
 				+ customerPanCard + ", customerPhotoPath=" + customerPhotoPath + ", customerSignaturePath="
-				+ customerSignaturePath + ", customerdetails=" + customerdetails + "]";
-	}*/
+				+ customerSignaturePath + "]";
+	}
+	
+	
 	
 	
 	

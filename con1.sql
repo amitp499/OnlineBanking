@@ -1,16 +1,14 @@
 
         
-        //new
-     create table CUSTOMER_MASTER_TBL (
-        LOGIN_ID number(10) primary key,              
-        ROLE varchar2(10) not null,
-        CUSTOMER_PASSWORD varchar2(50) not null,
-        CUSTOMER_ID number(10) not null,
-        foreign key(CUSTOMER_ID) REFERENCES CUSTOMER_DETAILS_TBL(CUSTOMER_ID)
-        );
+        --new
+        
+        Create sequence customer_id_seq;
+        create sequence login_id_seq;
+        create sequence account_no_seq;
+        create sequence beneficiary_id_seq;
         commit;
-
-	create table CUSTOMER_DETAILS_TBL (
+        
+        create table CUSTOMER_DETAILS_TBL (
         CUSTOMER_ID number(10) primary key,
         CUSTOMER_NAME varchar2(30) not null,
         CUSTOMER_MOBLILENO number(10) unique,        
@@ -28,7 +26,18 @@
         CUSTOMER_SIGNATURE_PATH varchar2(30) not null        
         );
         COMMIT;
+    
         
+     create table CUSTOMER_MASTER_TBL (
+        LOGIN_ID number(10) primary key,              
+        ROLE varchar2(10) not null,
+        CUSTOMER_PASSWORD varchar2(50) not null,
+        CUSTOMER_ID number(10) not null,
+        foreign key(CUSTOMER_ID) REFERENCES CUSTOMER_DETAILS_TBL(CUSTOMER_ID)
+        );
+        commit;
+
+	    
         create table ACCOUNTS_TBL (
         CUSTOMER_ID number(10) ,              
         ACCOUNT_TYPE varchar2(10) not null,
@@ -61,6 +70,25 @@
         foreign key(CUSTOMER_ACCOUNT_NO) REFERENCES ACCOUNTS_TBL(ACCOUNT_No)
         );
         commit;
+        
+        
+        select * from CUSTOMER_MASTER_TBL;
+        desc CUSTOMER_MASTER_TBL;
+        desc CUSTOMER_DETAILS_TBL;
+        select * from CUSTOMER_DETAILS_TBL;
+        select * from ACCOUNTS_TBL;
+        select * from BENEFICIARY_DETAILS_TBL;
+        
+        drop table CUSTOMER_DETAILS_TBL;
+        drop table CUSTOMER_MASTER_TBL;
+        drop table ACCOUNTS_TBL;
+        drop table TRANSACTION_TBL;
+        drop table BENEFICIARY_DETAILS_TBL;
+        commit;
+        
+        select beneficiary_id_seq.nextval from dual
+    
+        
    
    
         

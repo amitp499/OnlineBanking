@@ -27,7 +27,7 @@ public class CustomerMaster implements Serializable{
 	private CustomerDetail customerdetail;
 	
 
-	@SequenceGenerator(name="login_id_seq", initialValue=7000,allocationSize=55)
+	@SequenceGenerator(name="login_id_seq",sequenceName="login_id_seq", initialValue=7000,allocationSize=55)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="login_id_seq")
 	@Id
 	@Column(name="LOGIN_ID")

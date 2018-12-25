@@ -1,6 +1,8 @@
 package com.jp.services;
 
 import com.jp.entities.Accounts;
+import com.jp.entities.BeneficiaryDetails;
+import com.jp.entities.CustomerDetail;
 import com.jp.entities.CustomerMaster;
 import com.jp.exceptions.OnlineBankingException;
 
@@ -11,6 +13,8 @@ public interface IOnlineBankingService {
 	
 	public boolean openAccount(Accounts ac) throws OnlineBankingException;
 	
-	public CustomerMaster serachUserIdCustomerMaster(Integer userId) throws OnlineBankingException;
+	public CustomerDetail serachUserIdCustomerMaster(Integer customerId) throws OnlineBankingException;
+	
+	public boolean addNewBeneDetails(BeneficiaryDetails bd) throws OnlineBankingException;
 
 }

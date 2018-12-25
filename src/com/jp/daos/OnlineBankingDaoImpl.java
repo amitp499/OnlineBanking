@@ -10,13 +10,14 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jp.entities.Accounts;
+import com.jp.entities.BeneficiaryDetails;
 import com.jp.entities.CustomerDetail;
 import com.jp.entities.CustomerMaster;
 import com.jp.exceptions.OnlineBankingException;
 
 
 @Repository("dao")
-@Transactional(propagation=Propagation.REQUIRED)
+@Transactional(propagation=Propagation.REQUIRES_NEW)
 public class OnlineBankingDaoImpl implements IOnlineBankingDao{
 	
 	@PersistenceContext
@@ -26,10 +27,8 @@ public class OnlineBankingDaoImpl implements IOnlineBankingDao{
 	public boolean addNewCustoer(CustomerMaster cm) throws OnlineBankingException {		
 		boolean addCustomerFlag=false;
 		
-		
-		
-		
 		entityManager.persist(cm);		
+		//
 		if (entityManager.find(CustomerMaster.class, cm.getLoginId())!=null){
 			
 			addCustomerFlag=true;
@@ -41,8 +40,8 @@ public class OnlineBankingDaoImpl implements IOnlineBankingDao{
 	@Override
 	public boolean addAccount(Accounts ac) throws OnlineBankingException {
 		boolean addAccountFlag=false;
-		System.out.println("saving");
-		System.out.println(ac);
+		//System.out.println("saving");
+		//System.out.println(ac);
 		entityManager.persist(ac);
 		
 		if (entityManager.find(Accounts.class, ac.getAccountNo())!=null){
@@ -54,10 +53,26 @@ public class OnlineBankingDaoImpl implements IOnlineBankingDao{
 	}
 
 	@Override
-	public CustomerMaster serachUserIdCustomerMaster(Integer userId) throws OnlineBankingException {
-		System.out.println("cust");
-		System.out.println(entityManager.find(CustomerMaster.class, userId));
-		return entityManager.find(CustomerMaster.class, userId);
+	public CustomerDetail serachUserIdCustomerMaster(Integer userId) throws OnlineBankingException {
+		//System.out.println("cust");
+		//System.out.println(entityManager.find(CustomerMaster.class, userId));
+		return entityManager.find(CustomerDetail.class, userId);
+	}
+
+	@Override
+	public boolean addNewBene(BeneficiaryDetails bd) throws OnlineBankingException {
+		
+		boolean addBeneFlag=false;
+		
+		//System.out.println(bd);
+		entityManager.persist(bd);		
+	
+		if (entityManager.find(BeneficiaryDetails.class, bd.getBeneficiaryAccountNo())!=null){
+			
+			addBeneFlag=true;
+			
+		}
+		return addBeneFlag;
 	}
 		
 	

@@ -25,7 +25,7 @@ public class Transactions {
 	private Double balance;
 	private Accounts accounts;
 	
-	@SequenceGenerator(name="transaction_id_seq", initialValue=268887,allocationSize=33)
+	@SequenceGenerator(name="transaction_id_seq", sequenceName="transaction_id_seq",initialValue=268887,allocationSize=33)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="transaction_id_seq")	
 	@Id
 	@Column(name="TRANSACTION_ID")

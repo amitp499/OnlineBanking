@@ -62,16 +62,16 @@ public class WebController {
 		
 		
 	//New Registration 
-		/*
+		
 		CustomerMaster cm = new CustomerMaster();
 		CustomerDetail cd = new CustomerDetail();
 		
-		cm.setUserId(123456);
+		//cm.setLoginId(123456);
 		
 		cm.setCustPassword("abcd");
 		cm.setRole("customer");
 				
-		cd.setCustomerId(9817548);
+		//cd.setCustomerId(9817548);
 		cd.setCustomerAadharId(1985471);
 		cd.setCustomerAddress("Mubai");
 		cd.setCustomerBranch("Andheri");
@@ -88,15 +88,16 @@ public class WebController {
 		cd.setCustomerState("MH");
 		
 		
-		cm.setCustomermaster(cd);
-		cd.setCustomerdetails(cm);
-		
+		cm.setCustomerdetail(cd);
+		cd.setCustomermaster(cm);
+		//System.out.println(cd);
+		//System.out.println(cm);
 		try {
 			on.addNewCustoer(cm);
 		} catch (OnlineBankingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 		
 		
 		

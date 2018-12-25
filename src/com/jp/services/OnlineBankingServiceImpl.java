@@ -8,11 +8,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jp.daos.IOnlineBankingDao;
 import com.jp.entities.Accounts;
+import com.jp.entities.BeneficiaryDetails;
+import com.jp.entities.CustomerDetail;
 import com.jp.entities.CustomerMaster;
 import com.jp.exceptions.OnlineBankingException;
 
 @Service("service")
-@Transactional(propagation=Propagation.REQUIRES_NEW)
+//@Transactional(propagation=Propagation.REQUIRES_NEW)
 public class OnlineBankingServiceImpl implements IOnlineBankingService{
 	
 	private IOnlineBankingDao dao;
@@ -30,9 +32,10 @@ public class OnlineBankingServiceImpl implements IOnlineBankingService{
 
 
 	@Override
-	public boolean registerNewCustoer(CustomerMaster cd) throws OnlineBankingException {
+	public boolean registerNewCustoer(CustomerMaster cm) throws OnlineBankingException {
 		
-		return dao.addNewCustoer(cd);
+		return dao.addNewCustoer(cm);
+		//return false;
 	}
 
 
@@ -48,9 +51,18 @@ public class OnlineBankingServiceImpl implements IOnlineBankingService{
 
 
 	@Override
-	public CustomerMaster serachUserIdCustomerMaster(Integer userId) throws OnlineBankingException {
+	public CustomerDetail serachUserIdCustomerMaster(Integer customerId) throws OnlineBankingException {
 		
-		return dao.serachUserIdCustomerMaster(userId);
+		return dao.serachUserIdCustomerMaster(customerId);
+	}
+
+
+
+
+	@Override
+	public boolean addNewBeneDetails(BeneficiaryDetails bd) throws OnlineBankingException {
+		// TODO Auto-generated method stub
+		return dao.addNewBene(bd);
 	}
 
 

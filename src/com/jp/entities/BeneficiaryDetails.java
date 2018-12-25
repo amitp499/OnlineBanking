@@ -17,7 +17,7 @@ public class BeneficiaryDetails {
 	private Integer beneficiaryId;
 	private String beneficiaryIfscCode;
 	private String beneficiartName;
-	private Long beneficiaryAccountNo;
+	private Integer beneficiaryAccountNo;
 	private CustomerDetail customerDetail;
 	
 	
@@ -27,7 +27,7 @@ public class BeneficiaryDetails {
 		
 	}
 	
-	@SequenceGenerator(name="beneficiary_id_seq", initialValue=35000,allocationSize=60)
+	@SequenceGenerator(name="beneficiary_id_seq",sequenceName="beneficiary_id_seq", initialValue=35,allocationSize=60)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="beneficiary_id_seq")
 	@Id
 	@Column(name="BENEFICIARY_ID")
@@ -55,10 +55,10 @@ public class BeneficiaryDetails {
 	}
 	
 	@Column(name="BENEFICIARY_ACCOUNTNO")
-	public Long getBeneficiaryAccountNo() {
+	public Integer getBeneficiaryAccountNo() {
 		return beneficiaryAccountNo;
 	}
-	public void setBeneficiaryAccountNo(Long beneficiaryAccountNo) {
+	public void setBeneficiaryAccountNo(Integer beneficiaryAccountNo) {
 		this.beneficiaryAccountNo = beneficiaryAccountNo;
 	}
 
@@ -70,6 +70,13 @@ public class BeneficiaryDetails {
 
 	public void setCustomerDetail(CustomerDetail customerDetail) {
 		this.customerDetail = customerDetail;
+	}
+
+	@Override
+	public String toString() {
+		return "BeneficiaryDetails [beneficiaryId=" + beneficiaryId + ", beneficiaryIfscCode=" + beneficiaryIfscCode
+				+ ", beneficiartName=" + beneficiartName + ", beneficiaryAccountNo=" + beneficiaryAccountNo
+				+ ", customerDetail=" + customerDetail + "]";
 	}
 	
 	
