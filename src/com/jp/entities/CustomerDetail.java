@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -46,7 +47,7 @@ public class CustomerDetail implements Serializable{
 	
 	
 	
-	@OneToMany(mappedBy="customerDetail", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="customerDetail", orphanRemoval=true, fetch=FetchType.EAGER)
 	public Set<BeneficiaryDetails> getBeneficiaryDetails() {
 		return beneficiaryDetails;
 	}

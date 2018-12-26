@@ -17,7 +17,6 @@ import com.jp.services.IOnlineBankingService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({	"file:WebContent/WEB-INF/spring.xml", "file:WebContent/WEB-INF/springWebCust.xml"})
-
 public class FundTransferToExternalBeneTest {
 	
 	@Autowired

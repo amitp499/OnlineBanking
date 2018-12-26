@@ -1,5 +1,7 @@
 package com.jp.daos;
 
+import java.util.Set;
+
 import javax.transaction.Transaction;
 
 import com.jp.entities.Accounts;
@@ -32,6 +34,10 @@ public interface IOnlineBankingDao {
 	public BeneficiaryDetails serachByBeneAccount(Integer beneAcctNo) throws OnlineBankingException;
 	
 //	public Integer serachByBeneAccount(Integer beneAcctNo) throws OnlineBankingException;
+	
+	public Set<BeneficiaryDetails> getListOfBene(Integer acctNo) throws OnlineBankingException;
+	
+	public boolean deleteBeneficiary(Integer beneId) throws OnlineBankingException;
 	
 	
 

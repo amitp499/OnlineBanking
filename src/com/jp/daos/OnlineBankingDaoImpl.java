@@ -1,5 +1,7 @@
 package com.jp.daos;
 
+import java.util.Set;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transaction;
@@ -20,7 +22,7 @@ import com.jp.exceptions.OnlineBankingException;
 
 
 @Repository("dao")
-@Transactional(propagation=Propagation.REQUIRED)
+@Transactional(propagation=Propagation.REQUIRES_NEW)
 public class OnlineBankingDaoImpl implements IOnlineBankingDao{
 	
 	@PersistenceContext
@@ -129,6 +131,36 @@ public class OnlineBankingDaoImpl implements IOnlineBankingDao{
 	public BeneficiaryDetails serachByBeneAccount(Integer beneAcctNo) throws OnlineBankingException {
 		
 		return entityManager.find(BeneficiaryDetails.class, beneAcctNo);
+	}
+
+	@Override
+	public Set<BeneficiaryDetails> getListOfBene(Integer acctNo) throws OnlineBankingException {
+		
+		CustomerDetail cdBeneList = entityManager.find(CustomerDetail.class, acctNo);
+		Set<BeneficiaryDetails> beneList = cdBeneList.getBeneficiaryDetails();
+		return beneList;
+	}
+
+	@Override
+	public boolean deleteBeneficiary(Integer beneId) throws OnlineBankingException {
+		boolean deleteBeneFlag=false;
+		boolean deleteFoundFlag=false;
+		
+		BeneficiaryDetails beneToDelete = entityManager.find(BeneficiaryDetails.class, beneId);
+		if (beneToDelete!=null) {
+			
+			System.out.println(beneToDelete);
+			entityManager.remove(beneToDelete);
+									
+			deleteFoundFlag=true;
+		}
+		
+		if ((entityManager.find(BeneficiaryDetails.class, beneId)==null) && (deleteFoundFlag==true)) {
+			
+			deleteBeneFlag=true;
+		}
+		
+		return deleteBeneFlag;
 	}
 
 	

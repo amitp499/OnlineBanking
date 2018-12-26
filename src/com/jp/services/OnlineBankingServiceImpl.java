@@ -1,5 +1,7 @@
 package com.jp.services;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,7 @@ import com.jp.entities.Transactions;
 import com.jp.exceptions.OnlineBankingException;
 
 @Service("service")
-@Transactional(propagation=Propagation.REQUIRES_NEW)
+//@Transactional(propagation=Propagation.REQUIRES_NEW)
 public class OnlineBankingServiceImpl implements IOnlineBankingService{
 	
 	private IOnlineBankingDao dao;
@@ -110,6 +112,24 @@ public class OnlineBankingServiceImpl implements IOnlineBankingService{
 	public BeneficiaryDetails serachByBeneAccount(Integer beneAcctNo) throws OnlineBankingException {
 		
 		return dao.serachByBeneAccount(beneAcctNo);
+	}
+
+
+
+
+	@Override
+	public Set<BeneficiaryDetails> getListOfBene(Integer acctNo) throws OnlineBankingException {
+		// TODO Auto-generated method stub
+		return dao.getListOfBene(acctNo);
+	}
+
+
+
+
+	@Override
+	public boolean deleteBeneficiary(Integer beneId) throws OnlineBankingException {
+		// TODO Auto-generated method stub
+		return dao.deleteBeneficiary(beneId);
 	}
 
 

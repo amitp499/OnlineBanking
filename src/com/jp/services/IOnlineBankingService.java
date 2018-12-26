@@ -1,5 +1,7 @@
 package com.jp.services;
 
+import java.util.Set;
+
 import com.jp.entities.Accounts;
 import com.jp.entities.BeneficiaryDetails;
 import com.jp.entities.CustomerDetail;
@@ -28,5 +30,9 @@ public interface IOnlineBankingService {
 	public boolean updateBalanceInAccounts(Accounts acct) throws OnlineBankingException;
 	
 	public BeneficiaryDetails serachByBeneAccount(Integer beneAcctNo) throws OnlineBankingException;
+	
+	public Set<BeneficiaryDetails> getListOfBene(Integer acctNo) throws OnlineBankingException;
+	
+	public boolean deleteBeneficiary(Integer beneId) throws OnlineBankingException;
 
 }
