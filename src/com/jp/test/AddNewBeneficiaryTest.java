@@ -29,13 +29,14 @@ public class AddNewBeneficiaryTest {
 		try {
 
 			BeneficiaryDetails bd = new BeneficiaryDetails();
-			bd.setBeneficiartName("Sunil");
-			bd.setBeneficiaryAccountNo(354543);
-			bd.setBeneficiaryIfscCode("HDFC4254");
-			bd.setCustomerDetail(Ios.serachUserIdCustomerMaster(300));
+			bd.setBeneficiartName("Rohit Durai");
+			bd.setBeneficiaryAccountNo(3549315);
+			bd.setBeneficiaryIfscCode("ONB5251");
+			bd.setCustomerDetail(Ios.serachUserIdCustomerMaster(3842625));
+			
 			assertTrue(Ios.addNewBeneDetails(bd));
 		} catch (OnlineBankingException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		

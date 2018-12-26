@@ -20,7 +20,7 @@ import com.jp.exceptions.OnlineBankingException;
 
 
 @Repository("dao")
-@Transactional(propagation=Propagation.REQUIRES_NEW)
+@Transactional(propagation=Propagation.REQUIRED)
 public class OnlineBankingDaoImpl implements IOnlineBankingDao{
 	
 	@PersistenceContext
@@ -57,8 +57,7 @@ public class OnlineBankingDaoImpl implements IOnlineBankingDao{
 
 	@Override
 	public CustomerDetail serachUserIdCustomerMaster(Integer userId) throws OnlineBankingException {
-		//System.out.println("cust");
-		//System.out.println(entityManager.find(CustomerMaster.class, userId));
+		
 		return entityManager.find(CustomerDetail.class, userId);
 	}
 
@@ -66,12 +65,13 @@ public class OnlineBankingDaoImpl implements IOnlineBankingDao{
 	public boolean addNewBene(BeneficiaryDetails bd) throws OnlineBankingException {
 		
 		boolean addBeneFlag=false;
-		
-		//System.out.println(bd);
-		entityManager.persist(bd);		
-	
-		if (entityManager.find(BeneficiaryDetails.class, bd.getBeneficiaryAccountNo())!=null){
 			
+		entityManager.persist(bd);		
+		
+		BeneficiaryDetails abd = entityManager.find(BeneficiaryDetails.class, bd.getBeneficiaryId());
+		System.out.println(abd);
+		if (abd.getBeneficiaryAccountNo()==bd.getBeneficiaryAccountNo()){
+			System.out.println("entered");
 			addBeneFlag=true;
 			
 		}
@@ -83,7 +83,7 @@ public class OnlineBankingDaoImpl implements IOnlineBankingDao{
 		
 
 		boolean addBalFlag=false;
-		System.out.println(trn);
+
 		
 		entityManager.persist(trn);		
 	
@@ -123,6 +123,12 @@ public class OnlineBankingDaoImpl implements IOnlineBankingDao{
 			
 		}
 		return updateBalFlag;
+	}
+
+	@Override
+	public BeneficiaryDetails serachByBeneAccount(Integer beneAcctNo) throws OnlineBankingException {
+		
+		return entityManager.find(BeneficiaryDetails.class, beneAcctNo);
 	}
 
 	

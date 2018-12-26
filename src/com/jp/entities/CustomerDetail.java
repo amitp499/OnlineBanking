@@ -96,7 +96,7 @@ public class CustomerDetail implements Serializable{
 		this.customerSignaturePath = customerSignaturePath;
 	}
 	
-	@SequenceGenerator(name="customer_id_seq",sequenceName="customer_id_seq", initialValue=5000,allocationSize=75)
+	@SequenceGenerator(name="customer_id_seq",sequenceName="customer_id_seq",allocationSize=75)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="customer_id_seq")
 	@Id
 	@Column(name="CUSTOMER_ID")	

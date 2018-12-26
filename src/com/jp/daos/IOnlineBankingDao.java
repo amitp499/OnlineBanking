@@ -28,5 +28,11 @@ public interface IOnlineBankingDao {
 	public Double getAccountBalance(Integer acctNo) throws OnlineBankingException;
 	
 	public boolean updateBalanceInAccounts(Accounts acct) throws OnlineBankingException;
+	
+	public BeneficiaryDetails serachByBeneAccount(Integer beneAcctNo) throws OnlineBankingException;
+	
+//	public Integer serachByBeneAccount(Integer beneAcctNo) throws OnlineBankingException;
+	
+	
 
 }

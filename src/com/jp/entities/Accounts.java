@@ -75,7 +75,7 @@ public abstract class Accounts implements Serializable{
 		
 	}
 	
-	@SequenceGenerator(name="account_no_seq",sequenceName="account_no_seq", initialValue=10254887,allocationSize=21)
+	@SequenceGenerator(name="account_no_seq",sequenceName="account_no_seq",allocationSize=21)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="account_no_seq")
 	@Id
 	@Column(name="ACCOUNT_NO")

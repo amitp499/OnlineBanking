@@ -16,7 +16,7 @@ import com.jp.entities.Transactions;
 import com.jp.exceptions.OnlineBankingException;
 
 @Service("service")
-//@Transactional(propagation=Propagation.REQUIRES_NEW)
+@Transactional(propagation=Propagation.REQUIRES_NEW)
 public class OnlineBankingServiceImpl implements IOnlineBankingService{
 	
 	private IOnlineBankingDao dao;
@@ -101,6 +101,15 @@ public class OnlineBankingServiceImpl implements IOnlineBankingService{
 	public boolean updateBalanceInAccounts(Accounts acct) throws OnlineBankingException {
 		
 		return dao.updateBalanceInAccounts(acct);
+	}
+
+
+
+
+	@Override
+	public BeneficiaryDetails serachByBeneAccount(Integer beneAcctNo) throws OnlineBankingException {
+		
+		return dao.serachByBeneAccount(beneAcctNo);
 	}
 
 

@@ -27,7 +27,7 @@ public class BeneficiaryDetails {
 		
 	}
 	
-	@SequenceGenerator(name="beneficiary_id_seq",sequenceName="beneficiary_id_seq", initialValue=35,allocationSize=60)
+	@SequenceGenerator(name="beneficiary_id_seq",sequenceName="beneficiary_id_seq", allocationSize=60)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="beneficiary_id_seq")
 	@Id
 	@Column(name="BENEFICIARY_ID")

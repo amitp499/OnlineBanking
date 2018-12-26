@@ -32,9 +32,9 @@ public class AddBalanaceToAccountTest {
 		SavingsAccount acts;		
 		
 		try {
-			acts = Ios.serachByAccountInAccounts(21);			
+			acts = Ios.serachByAccountInAccounts(3549336);			
 			trn.setAmount(500.00);
-			trn.setBeneAccountNo(21);			
+			trn.setBeneAccountNo(3549336);			
 			trn.setTransactionInfo("Add Balance to Saving Acount");
 			trn.setTransactionType("Credit");
 			
@@ -45,7 +45,7 @@ public class AddBalanaceToAccountTest {
 				acts.setAccountBalance(trn.getBalance());
 			}
 			
-			trn.setAccounts(Ios.serachByAccountInAccounts(21));
+			trn.setAccounts(acts);
 			Ios.addBalanceToAccounts(trn);
 			Ios.updateBalanceInAccounts(acts);
 		} catch (OnlineBankingException e) {

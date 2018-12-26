@@ -1,11 +1,16 @@
 
         
-        --new
+      
+        drop sequence customer_id_seq;
+        drop sequence login_id_seq;
+        drop sequence account_no_seq;
+        drop sequence beneficiary_id_seq;
+        drop sequence transaction_id_seq;
         
-        Create sequence customer_id_seq;
-        create sequence login_id_seq;
-        create sequence account_no_seq;
-        create sequence beneficiary_id_seq;
+        Create sequence customer_id_seq start with 51235;
+        create sequence login_id_seq start with 714531;
+        create sequence account_no_seq start with 169014;
+        create sequence beneficiary_id_seq start with 2235;
         create sequence transaction_id_seq start with 268887;
         commit;
         
@@ -55,6 +60,7 @@
         BENEFICIARY_ACCOUNTNO number(10) not null,
         BENEFICIARY_NAME varchar2(30) not null,
         BENEFICIARY_ID number(10) primary key,
+        --BENEFICIARY_TYPE varchar2(10) not null,
         foreign key(CUSTOMER_ID) REFERENCES CUSTOMER_DETAILS_TBL(CUSTOMER_ID)
         );
         commit;
@@ -82,15 +88,17 @@
         select * from TRANSACTION_TBL;
         desc TRANSACTION_TBL;
         
-        drop table CUSTOMER_DETAILS_TBL;
-        drop table CUSTOMER_MASTER_TBL;
-        drop table ACCOUNTS_TBL;
+       
+        drop table CUSTOMER_MASTER_TBL;        
         drop table TRANSACTION_TBL;
         drop table BENEFICIARY_DETAILS_TBL;
+        drop table ACCOUNTS_TBL;
+        drop table CUSTOMER_DETAILS_TBL;
         commit;
         
         select beneficiary_id_seq.nextval from dual
-    
+        delete from BENEFICIARY_DETAILS_TBL where customer_id='3842850';
+        commit;
         
    
    

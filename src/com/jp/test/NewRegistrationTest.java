@@ -28,37 +28,33 @@ public class NewRegistrationTest {
 		
 		CustomerMaster cm = new CustomerMaster();
 		CustomerDetail cd = new CustomerDetail();
-		
-		
+				
 		cm.setCustPassword("abcd");
 		cm.setRole("customer");
-				
-	
-		cd.setCustomerAadharId(2980471);
-		cd.setCustomerAddress("Mubai");
-		cd.setCustomerBranch("Andheri");
-		cd.setCustomerCity("Thane");
+					
+		cd.setCustomerAadharId(9276142);
+		cd.setCustomerAddress("New Mumbai");
+		cd.setCustomerBranch("Nerul");
+		cd.setCustomerCity("Nerul");
 		cd.setCustomerCountry("India");
-		cd.setCustomerDOB("17-Sep-1987");
-		cd.setCustomerEmail("amitp@gail.co");
+		cd.setCustomerDOB("17-Sep-1984");
+		cd.setCustomerEmail("sunil@gmail.co");
 		cd.setCustomerGender("Male");
-		cd.setCustomerMobileNo(8082295);
-		cd.setCustomerName("Ait");
-		cd.setCustomerPanCard("Q6532534");
+		cd.setCustomerMobileNo(9462346);
+		cd.setCustomerName("Sunil Tikoo");
+		cd.setCustomerPanCard("A234325");
 		cd.setCustomerPhotoPath("sadsf");
 		cd.setCustomerSignaturePath("jhkh");
 		cd.setCustomerState("MH");
-		
-		
+				
 		cm.setCustomerdetail(cd);
 		cd.setCustomermaster(cm);
-		//System.out.println(cd);
-		//System.out.println(cm);
+	
 		try {
-			//Ios.registerNewCustoer(cm);
+			
 			assertTrue(Ios.registerNewCustoer(cm));
 		} catch (OnlineBankingException e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		}
 		
