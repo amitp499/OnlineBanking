@@ -1,8 +1,11 @@
 package com.jp.entities;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,16 +19,14 @@ import javax.persistence.Table;
 public class Transactions {
 	
 	private Integer transactionId;
-	//private Integer accountNo;
 	private Double amount;
 	private String transactionType;
 	private Integer beneAccountNo;
 	private String transactionInfo;
-	private String dateTime;
 	private Double balance;
 	private Accounts accounts;
 	
-	@SequenceGenerator(name="transaction_id_seq", sequenceName="transaction_id_seq",initialValue=268887,allocationSize=33)
+	@SequenceGenerator(name="transaction_id_seq", sequenceName="transaction_id_seq",allocationSize=33)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="transaction_id_seq")	
 	@Id
 	@Column(name="TRANSACTION_ID")
@@ -39,7 +40,7 @@ public class Transactions {
 	}
 
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="CUSTOMER_ACCOUNT_NO", referencedColumnName="ACCOUNT_NO")
 	public Accounts getAccounts() {
 		return accounts;
@@ -99,18 +100,6 @@ public class Transactions {
 	}
 
 
-	@Column(name="TRANSACTION_DATETIME")
-	public String getDateTime() {
-		return dateTime;
-	}
-
-
-
-	public void setDateTime(String dateTime) {
-		this.dateTime = dateTime;
-	}
-
-
 	@Column(name="ACCOUNT_BALANCE")
 	public Double getBalance() {
 		return balance;
@@ -127,6 +116,14 @@ public class Transactions {
 	public Transactions() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+
+	@Override
+	public String toString() {
+		return "Transactions [transactionId=" + transactionId + ", amount=" + amount + ", transactionType="
+				+ transactionType + ", beneAccountNo=" + beneAccountNo + ", transactionInfo=" + transactionInfo
+				 + ", balance=" + balance + ", accounts=" + accounts + "]";
 	}
 	
 	

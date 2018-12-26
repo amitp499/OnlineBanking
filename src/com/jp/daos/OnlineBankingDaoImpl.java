@@ -2,6 +2,7 @@ package com.jp.daos;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transaction;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,6 +14,8 @@ import com.jp.entities.Accounts;
 import com.jp.entities.BeneficiaryDetails;
 import com.jp.entities.CustomerDetail;
 import com.jp.entities.CustomerMaster;
+import com.jp.entities.SavingsAccount;
+import com.jp.entities.Transactions;
 import com.jp.exceptions.OnlineBankingException;
 
 
@@ -74,6 +77,55 @@ public class OnlineBankingDaoImpl implements IOnlineBankingDao{
 		}
 		return addBeneFlag;
 	}
+
+	@Override
+	public boolean addBalanceToAccounts(Transactions trn) throws OnlineBankingException {
+		
+
+		boolean addBalFlag=false;
+		System.out.println(trn);
+		
+		entityManager.persist(trn);		
+	
+		if (entityManager.find(Transactions.class, trn.getTransactionId())!=null){
+			
+			addBalFlag=true;
+			
+		}
+		return addBalFlag;
+	}
+
+	@Override
+	public SavingsAccount serachByAccountInAccounts(Integer acctNo) throws OnlineBankingException {
+		
+		return entityManager.find(SavingsAccount.class, acctNo);
+	}
+
+	@Override
+	public Double getAccountBalance(Integer acctNo) throws OnlineBankingException {
+		Accounts aa = entityManager.find(Accounts.class, acctNo);
+		return aa.getAccountBalance();
+	}
+
+	@Override
+	public boolean updateBalanceInAccounts(Accounts acct) throws OnlineBankingException {
+
+		boolean updateBalFlag=false;
+		//System.out.println(trn);
+		
+		entityManager.merge(acct);
+		
+		Accounts updatedAccount = entityManager.find(Accounts.class, acct.getAccountNo());
+	
+		if (acct.getAccountBalance()==updatedAccount.getAccountBalance()){
+			
+			updateBalFlag=true;
+			
+		}
+		return updateBalFlag;
+	}
+
+	
 		
 	
 	

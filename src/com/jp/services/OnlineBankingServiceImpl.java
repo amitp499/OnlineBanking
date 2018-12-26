@@ -11,6 +11,8 @@ import com.jp.entities.Accounts;
 import com.jp.entities.BeneficiaryDetails;
 import com.jp.entities.CustomerDetail;
 import com.jp.entities.CustomerMaster;
+import com.jp.entities.SavingsAccount;
+import com.jp.entities.Transactions;
 import com.jp.exceptions.OnlineBankingException;
 
 @Service("service")
@@ -63,6 +65,42 @@ public class OnlineBankingServiceImpl implements IOnlineBankingService{
 	public boolean addNewBeneDetails(BeneficiaryDetails bd) throws OnlineBankingException {
 		// TODO Auto-generated method stub
 		return dao.addNewBene(bd);
+	}
+
+
+
+
+	@Override
+	public boolean addBalanceToAccounts(Transactions trn) throws OnlineBankingException {
+		// TODO Auto-generated method stub
+		return dao.addBalanceToAccounts(trn);
+	}
+
+
+
+
+	@Override
+	public SavingsAccount serachByAccountInAccounts(Integer acctNo) throws OnlineBankingException {
+		// TODO Auto-generated method stub
+		return dao.serachByAccountInAccounts(acctNo);
+	}
+
+
+
+
+	@Override
+	public Double getAccountBalance(Integer acctNo) throws OnlineBankingException {
+		
+		return dao.getAccountBalance(acctNo);
+	}
+
+
+
+
+	@Override
+	public boolean updateBalanceInAccounts(Accounts acct) throws OnlineBankingException {
+		
+		return dao.updateBalanceInAccounts(acct);
 	}
 
 

@@ -6,6 +6,7 @@
         create sequence login_id_seq;
         create sequence account_no_seq;
         create sequence beneficiary_id_seq;
+        create sequence transaction_id_seq start with 268887;
         commit;
         
         create table CUSTOMER_DETAILS_TBL (
@@ -64,9 +65,9 @@
         BENE_ACCOUNTNO number(10) not null,
         ACCOUNT_BALANCE  number(12,2) not null,
         AMOUNT  number(12,2) not null,
-        TRANSACTION_ID number(10) primary key,
-        TRANSACTION_DATETIME date not null,
-        TRANSACTION_INFO varchar2(10) not null,
+        TRANSACTION_ID number(20) primary key,
+        TRANSACTION_DATETIME TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        TRANSACTION_INFO varchar2(30) not null,
         foreign key(CUSTOMER_ACCOUNT_NO) REFERENCES ACCOUNTS_TBL(ACCOUNT_No)
         );
         commit;
@@ -78,6 +79,8 @@
         select * from CUSTOMER_DETAILS_TBL;
         select * from ACCOUNTS_TBL;
         select * from BENEFICIARY_DETAILS_TBL;
+        select * from TRANSACTION_TBL;
+        desc TRANSACTION_TBL;
         
         drop table CUSTOMER_DETAILS_TBL;
         drop table CUSTOMER_MASTER_TBL;
