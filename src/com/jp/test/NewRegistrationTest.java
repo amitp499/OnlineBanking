@@ -32,17 +32,17 @@ public class NewRegistrationTest {
 		cm.setCustPassword("abcd");
 		cm.setRole("customer");
 					
-		cd.setCustomerAadharId(9276142);
-		cd.setCustomerAddress("New Mumbai");
-		cd.setCustomerBranch("Nerul");
-		cd.setCustomerCity("Nerul");
+		cd.setCustomerAadharId(8272132);
+		cd.setCustomerAddress("Thane");
+		cd.setCustomerBranch("Thane");
+		cd.setCustomerCity("Thane");
 		cd.setCustomerCountry("India");
-		cd.setCustomerDOB("17-Sep-1984");
-		cd.setCustomerEmail("sunil@gmail.co");
+		cd.setCustomerDOB("17-Sep-1987");
+		cd.setCustomerEmail("amitp@gmail.co");
 		cd.setCustomerGender("Male");
-		cd.setCustomerMobileNo(9462346);
-		cd.setCustomerName("Sunil Tikoo");
-		cd.setCustomerPanCard("A234325");
+		cd.setCustomerMobileNo(9761346);
+		cd.setCustomerName("Rohit Durai");
+		cd.setCustomerPanCard("A534129");
 		cd.setCustomerPhotoPath("sadsf");
 		cd.setCustomerSignaturePath("jhkh");
 		cd.setCustomerState("MH");

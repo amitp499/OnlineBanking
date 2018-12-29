@@ -1,5 +1,7 @@
 package com.jp.entities;
 
+import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -13,11 +15,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity(name="Transaction")
 @Table(name="TRANSACTION_TBL")
-public class Transactions {
+public class Transactions implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8174998037086640974L;
 	private Integer transactionId;
 	private Double amount;
 	private String transactionType;
@@ -25,7 +33,20 @@ public class Transactions {
 	private String transactionInfo;
 	private Double balance;
 	private Accounts accounts;
+	private String transactionDateTime;
 	
+	//@Temporal(value=TemporalType.DATE)
+	@Column(name="TRANSACTION_DATETIME")
+	public String getTransactionDateTime() {
+		return transactionDateTime;
+	}
+
+
+	public void setTransactionDateTime(String transactionDateTime) {
+		this.transactionDateTime = transactionDateTime;
+	}
+
+
 	@SequenceGenerator(name="transaction_id_seq", sequenceName="transaction_id_seq",allocationSize=33)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="transaction_id_seq")	
 	@Id

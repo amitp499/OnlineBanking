@@ -29,14 +29,18 @@ public class AddBalanaceToAccountTest {
 	public void testAddBalanceToAccounts() {
 		
 		Transactions trn = new Transactions();
-		SavingsAccount acts;		
+		Accounts acts;		
 		
 		try {
-			acts = Ios.serachByAccountInAccounts(3549336);			
-			trn.setAmount(500.00);
-			trn.setBeneAccountNo(3549336);			
+			acts = Ios.serachByAccountInAccounts(3549777);			
+			trn.setAmount(5000.00);
+			trn.setBeneAccountNo(3549777);			
 			trn.setTransactionInfo("Add Balance to Saving Acount");
 			trn.setTransactionType("Credit");
+			//trn.setTransactionDateTime(new Date());
+			SimpleDateFormat format = new SimpleDateFormat("dd-MMM-YYYY");
+			
+			trn.setTransactionDateTime(format.format(new Date()));
 			
 			
 			if (trn.getTransactionType().equalsIgnoreCase("Credit")) {

@@ -36,7 +36,7 @@
 			
 		<servlet-mapping>
 			<servlet-name>fcForBank</servlet-name>
-			<url-pattern>*.in</url-pattern>
+			<url-pattern>/OB/*</url-pattern>
 		</servlet-mapping>
 		
 		

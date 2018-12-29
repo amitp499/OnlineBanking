@@ -1,9 +1,13 @@
 package com.jp.daos;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transaction;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,9 +102,14 @@ public class OnlineBankingDaoImpl implements IOnlineBankingDao{
 	}
 
 	@Override
-	public SavingsAccount serachByAccountInAccounts(Integer acctNo) throws OnlineBankingException {
+	public Accounts serachByAccountInAccounts(Integer acctNo) throws OnlineBankingException {
 		
-		return entityManager.find(SavingsAccount.class, acctNo);
+		Query query = entityManager.createQuery("Select e from Accounts e where e.accountNo = :acctNo");
+		query.setParameter("acctNo",acctNo);
+			Accounts act = (Accounts) query.getSingleResult();
+		
+		//return entityManager.find(Accounts.class, acctNo);
+			return act;
 	}
 
 	@Override
@@ -161,6 +170,20 @@ public class OnlineBankingDaoImpl implements IOnlineBankingDao{
 		}
 		
 		return deleteBeneFlag;
+	}
+
+	@Override
+	public ArrayList<Transactions> viewAccountStatement(Integer accountNo, String fromDate, String toDate) throws OnlineBankingException {
+		
+		Query query = entityManager.createQuery("select t from Transaction t where t.accounts.accountNo = :accountNo"
+				+ " and t.transactionDateTime between :fromDate and :toDate");
+		//select * from TRANSACTION_TBL where customer_account_no ='3549777' and transaction_datetime between '29-DEC-18' and '29-DEC-18';
+		query.setParameter("accountNo",accountNo);
+		query.setParameter("fromDate",fromDate);
+		query.setParameter("toDate",toDate);
+		
+		ArrayList<Transactions> trnList = (ArrayList<Transactions>) query.getResultList();
+		return trnList;
 	}
 
 	

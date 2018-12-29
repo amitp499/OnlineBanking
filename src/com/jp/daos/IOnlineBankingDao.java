@@ -1,5 +1,8 @@
 package com.jp.daos;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Set;
 
 import javax.transaction.Transaction;
@@ -25,7 +28,7 @@ public interface IOnlineBankingDao {
 	
 	public boolean addBalanceToAccounts(Transactions trn) throws OnlineBankingException;
 	
-	public SavingsAccount serachByAccountInAccounts(Integer acctNo) throws OnlineBankingException;
+	public Accounts serachByAccountInAccounts(Integer acctNo) throws OnlineBankingException;
 	
 	public Double getAccountBalance(Integer acctNo) throws OnlineBankingException;
 	
@@ -38,6 +41,8 @@ public interface IOnlineBankingDao {
 	public Set<BeneficiaryDetails> getListOfBene(Integer acctNo) throws OnlineBankingException;
 	
 	public boolean deleteBeneficiary(Integer beneId) throws OnlineBankingException;
+	
+	public ArrayList<Transactions> viewAccountStatement(Integer accountNo,String fromDate, String toDate) throws OnlineBankingException;
 	
 	
 

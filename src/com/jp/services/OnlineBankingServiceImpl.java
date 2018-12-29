@@ -1,5 +1,8 @@
 package com.jp.services;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,7 +85,7 @@ public class OnlineBankingServiceImpl implements IOnlineBankingService{
 
 
 	@Override
-	public SavingsAccount serachByAccountInAccounts(Integer acctNo) throws OnlineBankingException {
+	public Accounts serachByAccountInAccounts(Integer acctNo) throws OnlineBankingException {
 		// TODO Auto-generated method stub
 		return dao.serachByAccountInAccounts(acctNo);
 	}
@@ -130,6 +133,15 @@ public class OnlineBankingServiceImpl implements IOnlineBankingService{
 	public boolean deleteBeneficiary(Integer beneId) throws OnlineBankingException {
 		// TODO Auto-generated method stub
 		return dao.deleteBeneficiary(beneId);
+	}
+
+
+
+
+	@Override
+	public ArrayList<Transactions> viewAccountStatement(Integer accountNo, String fromDate, String toDate) throws OnlineBankingException {
+		// TODO Auto-generated method stub
+		return dao.viewAccountStatement(accountNo, fromDate, toDate);
 	}
 
 

@@ -17,6 +17,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity(name="Customer_Detail")
 @Table(name="CUSTOMER_DETAILS_TBL")
 public class CustomerDetail implements Serializable{
@@ -43,11 +45,9 @@ public class CustomerDetail implements Serializable{
 	private Set<BeneficiaryDetails> beneficiaryDetails;
 	
 
-	
-	
-	
-	
+		
 	@OneToMany(mappedBy="customerDetail", orphanRemoval=true, fetch=FetchType.EAGER)
+	@JsonIgnore
 	public Set<BeneficiaryDetails> getBeneficiaryDetails() {
 		return beneficiaryDetails;
 	}
@@ -58,7 +58,8 @@ public class CustomerDetail implements Serializable{
 	}
 
 
-	@OneToMany(mappedBy="customerDetail", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="customerDetail", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JsonIgnore
 	public Set<Accounts> getAccount() {
 		return account;
 	}
@@ -113,6 +114,7 @@ public class CustomerDetail implements Serializable{
 	
 	
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="customerdetail")
+	@JsonIgnore
 	public CustomerMaster getCustomermaster() {
 		return customermaster;
 	}

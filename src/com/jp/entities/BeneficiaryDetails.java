@@ -1,5 +1,7 @@
 package com.jp.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity(name="Beneficiary")
 @Table(name="BENEFICIARY_DETAILS_TBL")
-public class BeneficiaryDetails {
+public class BeneficiaryDetails implements Serializable{
 	
 	private Integer beneficiaryId;
 	private String beneficiaryIfscCode;

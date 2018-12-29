@@ -1,109 +1,78 @@
 package com.jp.controllers;
 
-import java.util.HashSet;
-import java.util.Set;
+
+
+
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.jp.daos.IOnlineBankingDao;
-import com.jp.daos.OnlineBankingDaoImpl;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import com.jp.entities.Accounts;
-import com.jp.entities.CreditCardAccount;
 import com.jp.entities.CustomerDetail;
-import com.jp.entities.CustomerMaster;
-import com.jp.entities.SavingsAccount;
+import com.jp.entities.Transactions;
 import com.jp.exceptions.OnlineBankingException;
+import com.jp.services.IOnlineBankingService;
 
-@Controller
+@RestController
 public class WebController {
 	
 	@Autowired
-	@Qualifier("dao")
-	private IOnlineBankingDao on;
+	@Qualifier("service")
+	private IOnlineBankingService ioS;
 	
 	@RequestMapping("HomePage.in")
 	public String displayHomePage(){
-		
-		//System.out.println("entered");
+				
 		return "homePage";
 	}
 	
-	@RequestMapping("CustomerRegistration.in")
-	public String customerRegistration(){
+	
+	@RequestMapping(value = "/viewAccountSummary/{accountNo}", method = RequestMethod.GET, headers = "Accept=application/json")
+	public Accounts customerRegistration(@PathVariable("accountNo") Integer accountNo){
 		
-		/*
+		Accounts act=null;
 		try {
+			 act =   ioS.serachByAccountInAccounts(accountNo);
 			
-		//Add Savings Account
-		SavingsAccount sb = new SavingsAccount();		
-					
-		sb.setAccountBalance(500.00);
-		sb.setAccountId(545453343);
-		sb.setCustomerMaster(on.serachUserIdCustomerMaster(12345));				
-		on.addAccount(sb);
-			
-			
-			//Add Savings Account		
-		CreditCardAccount cca = new CreditCardAccount();
-		cca.setAccountBalance(1500.00);
-		cca.setAccountId(23454534);
-		cca.setCustomerMaster(on.serachUserIdCustomerMaster(12345));				
-		on.addAccount(cca);
-		
 		} catch (OnlineBankingException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
-		*/
+		return act;
+	}
+	
+	@RequestMapping(value = "/viewCustomerProfile/{customerId}", method = RequestMethod.GET, headers = "Accept=application/json")
+	public CustomerDetail viewCustomerProfile(@PathVariable("customerId") Integer customerId){
 		
-		
-		
-	//New Registration 
-		
-		CustomerMaster cm = new CustomerMaster();
-		CustomerDetail cd = new CustomerDetail();
-		
-		//cm.setLoginId(123456);
-		
-		cm.setCustPassword("abcd");
-		cm.setRole("customer");
-				
-		//cd.setCustomerId(9817548);
-		cd.setCustomerAadharId(1985471);
-		cd.setCustomerAddress("Mubai");
-		cd.setCustomerBranch("Andheri");
-		cd.setCustomerCity("Thane");
-		cd.setCustomerCountry("India");
-		cd.setCustomerDOB("17-Sep-1987");
-		cd.setCustomerEmail("amitp@gail.co");
-		cd.setCustomerGender("Male");
-		cd.setCustomerMobileNo(80825);
-		cd.setCustomerName("Ait");
-		cd.setCustomerPanCard("6532514");
-		cd.setCustomerPhotoPath("sadsf");
-		cd.setCustomerSignaturePath("jhkh");
-		cd.setCustomerState("MH");
-		
-		
-		cm.setCustomerdetail(cd);
-		cd.setCustomermaster(cm);
-		//System.out.println(cd);
-		//System.out.println(cm);
+		CustomerDetail cd=null;
 		try {
-			on.addNewCustoer(cm);
+			 cd =   ioS.serachUserIdCustomerMaster(customerId);
+			System.out.println(cd);
 		} catch (OnlineBankingException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
+		return cd;
+	}
+	
+	@RequestMapping(value = "/viewAccountStatement/{accountNo}/{fromDate}/{toDate}", method = RequestMethod.GET, headers = "Accept=application/json")
+	public ArrayList<Transactions> viewAccountStatement(@PathVariable("accountNo") Integer accountNo,@PathVariable("fromDate") String fromDate,@PathVariable("toDate") String toDate ){
 		
+		ArrayList<Transactions> tranList= null;
 		
+		try {
+			
+			  tranList = ioS.viewAccountStatement(accountNo, fromDate, toDate);
+			
+		} catch (OnlineBankingException e) {
+			
+			e.printStackTrace();
+		}
+		return tranList;
 		
-		
-		
-		
-		return "homePage";
 	}
 }

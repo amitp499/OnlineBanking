@@ -2,6 +2,10 @@ package com.jp.test;
 
 import static org.junit.Assert.assertTrue;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.jp.entities.Accounts;
 import com.jp.entities.BeneficiaryDetails;
 import com.jp.entities.SavingsAccount;
 import com.jp.entities.Transactions;
@@ -28,15 +33,20 @@ public class FundTransferToExternalBeneTest {
 		
 		Transactions trn = new Transactions();
 		BeneficiaryDetails bd = new BeneficiaryDetails();
-		SavingsAccount acts;		
+		Accounts acts;		
 		
 		try {
 			
-			acts = Ios.serachByAccountInAccounts(3549336);	
-			trn.setAmount(100.00);
+			acts = Ios.serachByAccountInAccounts(3549777);	
+			trn.setAmount(1200.00);
 			trn.setBeneAccountNo(12354543);			
 			trn.setTransactionInfo("Transfer Fund to Viral");
 			trn.setTransactionType("Debit");
+			
+			SimpleDateFormat format = new SimpleDateFormat("dd-MMM-YYYY");			
+			trn.setTransactionDateTime(format.format(new Date()));
+			
+			//trn.setTransactionDateTime(Calendar.getInstance());
 						
 			if (trn.getTransactionType().equalsIgnoreCase("Debit")) {
 				acts.getAccountBalance();

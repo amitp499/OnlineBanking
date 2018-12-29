@@ -1,6 +1,9 @@
 package com.jp.test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,36 +12,32 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.jp.entities.BeneficiaryDetails;
+import com.jp.entities.Transactions;
 import com.jp.exceptions.OnlineBankingException;
 import com.jp.services.IOnlineBankingService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({	"file:WebContent/WEB-INF/spring.xml", "file:WebContent/WEB-INF/springWebCust.xml"})
-public class AddNewBeneficiaryTest {
+public class ViewAccountStatementTest {
 
 	@Autowired
 	@Qualifier("service")
 	private IOnlineBankingService Ios;
 	
 	@Test
-	public void testAdditionOfBeneficiary() {
+	public void testViewAccountStatement() {
 		
-		
+		ArrayList<Transactions> tranList;
 		try {
-
-			BeneficiaryDetails bd = new BeneficiaryDetails();
-			bd.setBeneficiartName("Shaunak");
-			bd.setBeneficiaryAccountNo(2249315);
-			bd.setBeneficiaryIfscCode("ICI4543");
-			bd.setCustomerDetail(Ios.serachUserIdCustomerMaster(3844125));
-			
-			assertTrue(Ios.addNewBeneDetails(bd));
+			tranList = Ios.viewAccountStatement(3549777, "29-Dec-2018", "29-Dec-2018");
+			assertNotNull(tranList);
 		} catch (OnlineBankingException e) {
-			
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		
+		
+		
 	}
-	
 }

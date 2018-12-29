@@ -29,7 +29,7 @@ public class OpenNewSavingsAccountTest {
 			SavingsAccount sb = new SavingsAccount();		
 			
 			sb.setAccountBalance(0.00);
-			sb.setCustomerDetail(Ios.serachUserIdCustomerMaster(3842850));
+			sb.setCustomerDetail(Ios.serachUserIdCustomerMaster(3844425));
 			assertTrue(Ios.openAccount(sb));
 		} catch (OnlineBankingException e) {
 			

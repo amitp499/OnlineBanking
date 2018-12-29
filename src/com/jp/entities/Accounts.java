@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,6 +20,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="Accounts")
 @Table(name="ACCOUNTS_TBL")
@@ -39,9 +43,13 @@ public abstract class Accounts implements Serializable{
 	private Set<Transactions> transactions;
 	
 	
-
+	@Transient
+	public String getDecriminatorValue() {
+	    return this.getClass().getAnnotation(DiscriminatorValue.class).value();
+	}
 
 	@OneToMany(mappedBy="accounts",  cascade=CascadeType.ALL)
+	@JsonIgnore
 	public Set<Transactions> getTransactions() {
 		return transactions;
 	}
@@ -54,6 +62,7 @@ public abstract class Accounts implements Serializable{
 
 	@ManyToOne
 	@JoinColumn(name="CUSTOMER_ID", referencedColumnName="CUSTOMER_ID")
+	@JsonIgnore
 	public CustomerDetail getCustomerDetail() {
 		return customerDetail;
 	}
