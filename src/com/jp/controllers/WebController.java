@@ -7,11 +7,15 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.jp.entities.Accounts;
+import com.jp.entities.BeneficiaryDetails;
 import com.jp.entities.CustomerDetail;
 import com.jp.entities.Transactions;
 import com.jp.exceptions.OnlineBankingException;
@@ -73,6 +77,44 @@ public class WebController {
 			e.printStackTrace();
 		}
 		return tranList;
+		
+	}
+	
+	@RequestMapping(value = "/addNewBeneficiary", method = RequestMethod.POST, headers = "Accept=application/json")		
+	public @ResponseBody boolean addNewBeneficiary(@RequestBody BeneficiaryDetails beneDetailsToAdd){
+						
+		boolean addBeneFlag=false;
+		
+		try {
+			System.out.println(beneDetailsToAdd.getBeneficiaryAccountNo());
+			System.out.println(beneDetailsToAdd.getBeneficiaryIfscCode());
+			System.out.println(beneDetailsToAdd.getBeneficiartName());
+			System.out.println("called");			
+			
+			addBeneFlag=ioS.addNewBeneDetails(beneDetailsToAdd);
+			
+		} catch (OnlineBankingException e) {
+			
+			e.printStackTrace();
+		}
+		return addBeneFlag;
+		
+	}
+	
+	@RequestMapping(value = "/viewBeneficiary/{customerId}", method = RequestMethod.GET, headers = "Accept=application/json")
+	public ArrayList<BeneficiaryDetails> viewBeneficiary(@PathVariable("customerId") Integer customerId){
+		
+		ArrayList<BeneficiaryDetails> beneList= null;
+		
+		try {
+			
+			beneList = ioS.getBeneficiaryListByCustomerId(customerId);
+			
+		} catch (OnlineBankingException e) {
+			
+			e.printStackTrace();
+		}
+		return beneList;
 		
 	}
 }

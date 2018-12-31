@@ -75,9 +75,9 @@ public class OnlineBankingDaoImpl implements IOnlineBankingDao{
 		entityManager.persist(bd);		
 		
 		BeneficiaryDetails abd = entityManager.find(BeneficiaryDetails.class, bd.getBeneficiaryId());
-		System.out.println(abd);
+		//System.out.println(abd);
 		if (abd.getBeneficiaryAccountNo()==bd.getBeneficiaryAccountNo()){
-			System.out.println("entered");
+			//System.out.println("entered");
 			addBeneFlag=true;
 			
 		}
@@ -184,6 +184,18 @@ public class OnlineBankingDaoImpl implements IOnlineBankingDao{
 		
 		ArrayList<Transactions> trnList = (ArrayList<Transactions>) query.getResultList();
 		return trnList;
+	}
+
+	@Override
+	public ArrayList<BeneficiaryDetails> getBeneficiaryListByCustomerId(Integer custId) throws OnlineBankingException {
+						
+		Query query = entityManager.createQuery("select b from Beneficiary b where b.customerDetail.customerId = :custId");
+		
+		query.setParameter("custId",custId);		
+		
+		ArrayList<BeneficiaryDetails> beneList = (ArrayList<BeneficiaryDetails>) query.getResultList();
+
+		return beneList;
 	}
 
 	

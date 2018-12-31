@@ -44,6 +44,8 @@ public interface IOnlineBankingDao {
 	
 	public ArrayList<Transactions> viewAccountStatement(Integer accountNo,String fromDate, String toDate) throws OnlineBankingException;
 	
+	public ArrayList<BeneficiaryDetails> getBeneficiaryListByCustomerId(Integer custId) throws OnlineBankingException;
+	
 	
 
 }

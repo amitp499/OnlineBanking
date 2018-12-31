@@ -147,5 +147,14 @@ public class OnlineBankingServiceImpl implements IOnlineBankingService{
 
 
 
+	@Override
+	public ArrayList<BeneficiaryDetails> getBeneficiaryListByCustomerId(Integer custId) throws OnlineBankingException {
+		
+		return dao.getBeneficiaryListByCustomerId(custId);
+	}
+
+
+
+
 	
 }

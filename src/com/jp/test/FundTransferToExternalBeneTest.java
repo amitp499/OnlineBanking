@@ -37,7 +37,7 @@ public class FundTransferToExternalBeneTest {
 		
 		try {
 			
-			acts = Ios.serachByAccountInAccounts(3549777);	
+			acts = Ios.serachByAccountInAccounts(3549294);	
 			trn.setAmount(1200.00);
 			trn.setBeneAccountNo(12354543);			
 			trn.setTransactionInfo("Transfer Fund to Viral");
