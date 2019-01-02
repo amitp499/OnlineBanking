@@ -18,6 +18,10 @@ import javax.persistence.Table;
 @Table(name="BENEFICIARY_DETAILS_TBL")
 public class BeneficiaryDetails implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1002160690606641618L;
 	private Integer beneficiaryId;
 	private String beneficiaryIfscCode;
 	private String beneficiartName;

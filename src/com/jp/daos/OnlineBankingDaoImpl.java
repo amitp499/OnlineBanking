@@ -139,7 +139,18 @@ public class OnlineBankingDaoImpl implements IOnlineBankingDao{
 	@Override
 	public BeneficiaryDetails serachByBeneAccount(Integer beneAcctNo) throws OnlineBankingException {
 		
-		return entityManager.find(BeneficiaryDetails.class, beneAcctNo);
+		/*BeneficiaryDetails bd = entityManager.find(BeneficiaryDetails.class, beneAcctNo);
+		System.out.println(bd);*/
+		
+		System.out.println(beneAcctNo);
+		
+			Query query = entityManager.createQuery("select b from Beneficiary b where b.beneficiaryAccountNo = :beneAcctNo");
+		
+		query.setParameter("beneAcctNo",beneAcctNo);		
+		
+		BeneficiaryDetails bene = (BeneficiaryDetails) query.getSingleResult();
+		
+		return bene;
 	}
 
 	@Override
