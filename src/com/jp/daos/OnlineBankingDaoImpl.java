@@ -188,10 +188,10 @@ public class OnlineBankingDaoImpl implements IOnlineBankingDao{
 		
 		Query query = entityManager.createQuery("select t from Transaction t where t.accounts.accountNo = :accountNo"
 				+ " and t.transactionDateTime between :fromDate and :toDate");
-		//select * from TRANSACTION_TBL where customer_account_no ='3549777' and transaction_datetime between '29-DEC-18' and '29-DEC-18';
+		//select * from TRANSACTION_TBL where customer_account_no ='3549777' and transaction_datetime between '29-DEC-18' and '29-DEC-18';	
 		query.setParameter("accountNo",accountNo);
-		query.setParameter("fromDate",fromDate);
-		query.setParameter("toDate",toDate);
+		query.setParameter("fromDate",fromDate+" T 00:00:00");
+		query.setParameter("toDate",toDate+" T 23:59:59");
 		
 		ArrayList<Transactions> trnList = (ArrayList<Transactions>) query.getResultList();
 		return trnList;

@@ -33,14 +33,18 @@ public class AddBalanaceToAccountTest {
 		
 		try {
 			acts = Ios.serachByAccountInAccounts(3549294);			
-			trn.setAmount(5000.00);
+			trn.setAmount(5.00);
 			trn.setBeneAccountNo(3549294);			
 			trn.setTransactionInfo("Add Balance to Saving Acount");
 			trn.setTransactionType("Credit");
 			//trn.setTransactionDateTime(new Date());
-			SimpleDateFormat format = new SimpleDateFormat("dd-MMM-YYYY");
+			//SimpleDateFormat format = new SimpleDateFormat("dd-MMM-YYYY");
 			
-			trn.setTransactionDateTime(format.format(new Date()));
+			//trn.setTransactionDateTime(Calendar.getInstance());
+			Calendar cal = Calendar.getInstance();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-YYYY 'T' HH:mm:ss");
+			String currentDateXmlFormated =  sdf.format(cal.getTime());
+			trn.setTransactionDateTime(currentDateXmlFormated);
 			
 			
 			if (trn.getTransactionType().equalsIgnoreCase("Credit")) {

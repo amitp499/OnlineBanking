@@ -43,10 +43,14 @@ public class FundTransferToExternalBeneTest {
 			trn.setTransactionInfo("Transfer Fund to Viral");
 			trn.setTransactionType("Debit");
 			
-			SimpleDateFormat format = new SimpleDateFormat("dd-MMM-YYYY");			
-			trn.setTransactionDateTime(format.format(new Date()));
+			//SimpleDateFormat format = new SimpleDateFormat("dd-MMM-YYYY");			
+			//trn.setTransactionDateTime(format.format(new Date()));
 			
 			//trn.setTransactionDateTime(Calendar.getInstance());
+			Calendar cal1 = Calendar.getInstance();
+			SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MMM-YYYY 'T' HH:mm:ss");
+			String currentDateXmlFormated1 =  sdf1.format(cal1.getTime());
+			trn.setTransactionDateTime(currentDateXmlFormated1);
 						
 			if (trn.getTransactionType().equalsIgnoreCase("Debit")) {
 				acts.getAccountBalance();

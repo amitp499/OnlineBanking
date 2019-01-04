@@ -72,7 +72,7 @@
         ACCOUNT_BALANCE  number(12,2) not null,
         AMOUNT  number(12,2) not null,
         TRANSACTION_ID number(20) primary key,
-        TRANSACTION_DATETIME varchar2(15) not null,
+        TRANSACTION_DATETIME varchar2(30) not null,
         TRANSACTION_INFO varchar2(30) not null,
         foreign key(CUSTOMER_ACCOUNT_NO) REFERENCES ACCOUNTS_TBL(ACCOUNT_No)
         );
@@ -90,19 +90,24 @@
         
        
     --  drop table CUSTOMER_MASTER_TBL;        
-     -- drop table TRANSACTION_TBL;
+     drop table TRANSACTION_TBL;
       -- drop table BENEFICIARY_DETAILS_TBL;
        --drop table ACCOUNTS_TBL;
        --drop table CUSTOMER_DETAILS_TBL;
         commit;
         
-        select beneficiary_id_seq.nextval from dual
-        delete from BENEFICIARY_DETAILS_TBL where beneficiary_id='134640';
+        select account_no_seq.nextval from dual
+        delete from ACCOUNTS_TBL where customer_id ='3844125';
         rollback;
         commit;
         --update CUSTOMER_DETAILS_TBL set customer_name='Amit Pandey' where customer_id='3844425';
-        select * from TRANSACTION_TBL where customer_account_no ='3549777' ;
-        and transaction_datetime between '29-Dec-2018' and '29-Dec-2018';
+        select * from TRANSACTION_TBL where transaction_datetime  between '02-Jan-2019' and '31-Dec-2019' and customer_account_no=3549294;
+        
+        select * from TRANSACTION_TBL where customer_account_no=3549294 and transaction_datetime  between '02-Jan-2019 T 00:00:00' and '31-Dec-2019 T 23:59:59';
+        
+        update CUSTOMER_DETAILS_TBL set customer_photo_path='assets\images\parth.1.png' where customer_id='3843000';
+        update CUSTOMER_DETAILS_TBL set customer_signature_path='assets\images\rash.png' where customer_id='3843000';
+        commit;
         
    
    

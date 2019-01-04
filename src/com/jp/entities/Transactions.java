@@ -35,7 +35,7 @@ public class Transactions implements Serializable{
 	private Accounts accounts;
 	private String transactionDateTime;
 	
-	//@Temporal(value=TemporalType.DATE)
+	
 	@Column(name="TRANSACTION_DATETIME")
 	public String getTransactionDateTime() {
 		return transactionDateTime;

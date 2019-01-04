@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jp.entities.Accounts;
 import com.jp.entities.BeneficiaryDetails;
 import com.jp.entities.CustomerDetail;
+import com.jp.entities.SavingsAccount;
 import com.jp.entities.Transactions;
 import com.jp.exceptions.OnlineBankingException;
 import com.jp.services.IOnlineBankingService;
@@ -114,6 +116,32 @@ public class WebController {
 		
 	}
 	
+	@RequestMapping(value = "/addNewAccount/{accountType}/{customerId}", method = RequestMethod.POST, headers = "Accept=application/json")		
+	public boolean addNewAccount(@PathVariable("accountType") String accountType, @PathVariable("customerId") Integer customerId){
+						
+		boolean addAccountFlag=false;
+		
+		try {
+				
+			if (accountType!=null || customerId!=null){
+				
+				Accounts sb = new SavingsAccount();		
+				
+				sb.setAccountBalance(0.00);
+				sb.setCustomerDetail(ioS.serachUserIdCustomerMaster(customerId));
+				
+				addAccountFlag = ioS.openAccount(sb);
+			}
+			
+			
+		} catch (OnlineBankingException e) {
+			
+			e.printStackTrace();
+		}
+		return addAccountFlag;
+		
+	}
+	
 	@RequestMapping(value = "/fundTransfer/{custAcctNo}/{trAmount}/{trComments}/{beneActNo}", method = RequestMethod.POST, headers = "Accept=application/json")		
 	public boolean fundTransferInternalBene(@PathVariable("custAcctNo") Integer custAcctNo, 
 			@PathVariable("trAmount") Double trAmount,
@@ -153,10 +181,11 @@ public class WebController {
 			frmtrn.setBeneAccountNo(beneActNo);			//account to credit
 			frmtrn.setTransactionInfo(trComments);
 			frmtrn.setTransactionType("Debit");
-			SimpleDateFormat format = new SimpleDateFormat("dd-MMM-YYYY");			
-			frmtrn.setTransactionDateTime(format.format(new Date()));
-			//frmtrn.setTransactionDateTime(Calendar.getInstance());
-						
+			Calendar cal = Calendar.getInstance();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-YYYY 'T' HH:mm:ss");
+			String currentDateXmlFormated =  sdf.format(cal.getTime());
+			frmtrn.setTransactionDateTime(currentDateXmlFormated);
+								
 			if (frmtrn.getTransactionType().equalsIgnoreCase("Debit")) {
 				frmActs.getAccountBalance();
 				frmtrn.setBalance(frmActs.getAccountBalance()-frmtrn.getAmount());
@@ -171,9 +200,7 @@ public class WebController {
 			if (frmAddBal==false || frmBalUpdate==false ){
 				frmTrnSuccess=false;
 			}
-			
-			
-						
+							
 			
 			
 			//--------------------------------------------------		
@@ -184,8 +211,11 @@ public class WebController {
 				totrn.setBeneAccountNo(custAcctNo);			//account debitted
 				totrn.setTransactionInfo("Credit to "+toActs.getCustomerDetail().getCustomerName());
 				totrn.setTransactionType("Credit");
-				SimpleDateFormat format1 = new SimpleDateFormat("dd-MMM-YYYY");			
-				totrn.setTransactionDateTime(format1.format(new Date()));
+				Calendar cal1 = Calendar.getInstance();
+				SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MMM-YYYY 'T' HH:mm:ss");
+				String currentDateXmlFormated1 =  sdf1.format(cal1.getTime());
+				totrn.setTransactionDateTime(currentDateXmlFormated1);
+				
 
 							
 				if (totrn.getTransactionType().equalsIgnoreCase("Credit")) {

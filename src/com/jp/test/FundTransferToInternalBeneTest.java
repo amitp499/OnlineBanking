@@ -46,9 +46,13 @@ public class FundTransferToInternalBeneTest {
 			frmtrn.setBeneAccountNo(3549315);			//account to credit
 			frmtrn.setTransactionInfo("Debit Rohits Account");
 			frmtrn.setTransactionType("Debit");
-			SimpleDateFormat format = new SimpleDateFormat("dd-MMM-YYYY");			
-			frmtrn.setTransactionDateTime(format.format(new Date()));
+			//SimpleDateFormat format = new SimpleDateFormat("dd-MMM-YYYY");			
+			//frmtrn.setTransactionDateTime(format.format(new Date()));
 			//frmtrn.setTransactionDateTime(Calendar.getInstance());
+			Calendar cal = Calendar.getInstance();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-YYYY 'T' HH:mm:ss");
+			String currentDateXmlFormated =  sdf.format(cal.getTime());
+			frmtrn.setTransactionDateTime(currentDateXmlFormated);
 						
 			if (frmtrn.getTransactionType().equalsIgnoreCase("Debit")) {
 				frmActs.getAccountBalance();
@@ -67,9 +71,13 @@ public class FundTransferToInternalBeneTest {
 			totrn.setBeneAccountNo(3549294);			//account debitted
 			totrn.setTransactionInfo("Credit Amit account");
 			totrn.setTransactionType("Credit");
-			SimpleDateFormat format1 = new SimpleDateFormat("dd-MMM-YYYY");			
-			totrn.setTransactionDateTime(format1.format(new Date()));
+			//SimpleDateFormat format1 = new SimpleDateFormat("dd-MMM-YYYY");			
+			//totrn.setTransactionDateTime(format1.format(new Date()));
 			//totrn.setTransactionDateTime(Calendar.getInstance());
+			Calendar cal1 = Calendar.getInstance();
+			SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MMM-YYYY 'T' HH:mm:ss");
+			String currentDateXmlFormated1 =  sdf1.format(cal1.getTime());
+			totrn.setTransactionDateTime(currentDateXmlFormated1);
 						
 			if (totrn.getTransactionType().equalsIgnoreCase("Credit")) {
 				toActs.getAccountBalance();
