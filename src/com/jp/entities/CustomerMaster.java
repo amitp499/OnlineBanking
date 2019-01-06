@@ -83,7 +83,8 @@ public class CustomerMaster implements Serializable{
 		this.role = role;
 	}
 
-
+	/*@SequenceGenerator(name="password_seq",sequenceName="password_seq")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="password_seq")*/
 	@Column(name="CUSTOMER_PASSWORD")
 	public String getCustPassword() {
 		return custPassword;

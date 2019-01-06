@@ -2,6 +2,9 @@ package com.jp.test;
 
 import static org.junit.Assert.assertTrue;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.jp.entities.CustomerDetail;
 import com.jp.entities.CustomerMaster;
 import com.jp.exceptions.OnlineBankingException;
+import com.jp.services.IEncyrptDecryptService;
+import com.jp.services.IOnlineBankingEmailService;
 import com.jp.services.IOnlineBankingService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -22,41 +27,60 @@ public class NewRegistrationTest {
 	@Qualifier("service")
 	private IOnlineBankingService Ios;
 	
+	@Autowired
+	@Qualifier("email_service")
+	private IOnlineBankingEmailService Ioes;
+	
+	@Autowired
+	@Qualifier("service_encrypt_decrypt")
+	private IEncyrptDecryptService Ieds;
+	
+	
 	
 	@Test
 	public void testNewRegistration() {
 		
+		
 		CustomerMaster cm = new CustomerMaster();
 		CustomerDetail cd = new CustomerDetail();
-				
-		cm.setCustPassword("abcd");
+		
+		try {
+	
 		cm.setRole("customer");
 					
-		cd.setCustomerAadharId(8272139);
+		cd.setCustomerAadharId(917254121L);
 		cd.setCustomerAddress("Thane");
 		cd.setCustomerBranch("Thane");
 		cd.setCustomerCity("Thane");
 		cd.setCustomerCountry("India");
 		cd.setCustomerDOB("17-Sep-1987");
-		cd.setCustomerEmail("zubair@gmail.co");
+		cd.setCustomerEmail("amitp499@gmail.com");
 		cd.setCustomerGender("Male");
-		cd.setCustomerMobileNo(9061346);
-		cd.setCustomerName("Zubair");
-		cd.setCustomerPanCard("Z534129");
+		cd.setCustomerMobileNo(2181556499L);
+		cd.setCustomerName("Amit");
+		cd.setCustomerPanCard("BWMQP2861F");
 		cd.setCustomerPhotoPath("sadsf");
 		cd.setCustomerSignaturePath("jhkh");
 		cd.setCustomerState("MH");
-				
+						
+		String encryptedPassword = Ieds.encrypt(Ios.generatePassword(), cd.getCustomerAadharId().toString());
+
+		cm.setCustPassword(encryptedPassword);
+		
 		cm.setCustomerdetail(cd);
 		cd.setCustomermaster(cm);
-	
-		try {
+						 					
+		assertTrue(Ios.registerNewCustoer(cm));
+		
+		String decryptedPassword = Ieds.decrypt(cm.getCustPassword(), cd.getCustomerAadharId().toString());
 			
-			assertTrue(Ios.registerNewCustoer(cm));
+		assertTrue(Ioes.sendCustomerRegistrationEmail(cd.getCustomerEmail(), cm.getLoginId(), decryptedPassword));
+		
 		} catch (OnlineBankingException e) {
 		
 			e.printStackTrace();
 		}
+		
 		
 		
 	}

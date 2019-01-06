@@ -7,11 +7,11 @@
         drop sequence beneficiary_id_seq;
         drop sequence transaction_id_seq;
         
-        Create sequence customer_id_seq start with 51235;
-        create sequence login_id_seq start with 714531;
-        create sequence account_no_seq start with 169014;
-        create sequence beneficiary_id_seq start with 2235;
-        create sequence transaction_id_seq start with 268887;
+        Create sequence customer_id_seq start with 79424300;
+        create sequence login_id_seq start with 34332400;
+        create sequence account_no_seq start with 10009875401;
+        create sequence beneficiary_id_seq start with 101;
+        create sequence transaction_id_seq start with 265482;
         commit;
         
         create table CUSTOMER_DETAILS_TBL (
@@ -28,8 +28,8 @@
         CUSTOMER_BRANCH varchar2(30) not null,
         CUSTOMER_AADHARID number(20) unique,
         CUSTOMER_PANCARD varchar2(20) unique,
-        CUSTOMER_PHOTO_PATH varchar2(30) not null,
-        CUSTOMER_SIGNATURE_PATH varchar2(30) not null        
+        CUSTOMER_PHOTO_PATH varchar2(50) not null,
+        CUSTOMER_SIGNATURE_PATH varchar2(50) not null        
         );
         COMMIT;
     
@@ -48,7 +48,7 @@
         CUSTOMER_ID number(10) ,              
         ACCOUNT_TYPE varchar2(10) not null,
         ACCOUNT_BALANCE  number(12,2),
-        ACCOUNT_No number(10) primary key,
+        ACCOUNT_No number(12) primary key,
         foreign key(CUSTOMER_ID) REFERENCES CUSTOMER_DETAILS_TBL(CUSTOMER_ID)
         );
         commit;
@@ -73,7 +73,7 @@
         AMOUNT  number(12,2) not null,
         TRANSACTION_ID number(20) primary key,
         TRANSACTION_DATETIME varchar2(30) not null,
-        TRANSACTION_INFO varchar2(30) not null,
+        TRANSACTION_INFO varchar2(50) not null,
         foreign key(CUSTOMER_ACCOUNT_NO) REFERENCES ACCOUNTS_TBL(ACCOUNT_No)
         );
         commit;
@@ -89,11 +89,11 @@
         desc TRANSACTION_TBL;
         
        
-    --  drop table CUSTOMER_MASTER_TBL;        
-     drop table TRANSACTION_TBL;
-      -- drop table BENEFICIARY_DETAILS_TBL;
-       --drop table ACCOUNTS_TBL;
-       --drop table CUSTOMER_DETAILS_TBL;
+    -- drop table CUSTOMER_MASTER_TBL;        
+     --drop table TRANSACTION_TBL;
+     --drop table BENEFICIARY_DETAILS_TBL;
+     --drop table ACCOUNTS_TBL;
+     --drop table CUSTOMER_DETAILS_TBL;
         commit;
         
         select account_no_seq.nextval from dual

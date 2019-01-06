@@ -1,4 +1,4 @@
-package com.jp.encryptdecrypt;
+package com.jp.services;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -9,12 +9,18 @@ import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
-public class EncryptDecrypt {
+import org.springframework.stereotype.Service;
+
+import com.jp.exceptions.OnlineBankingException;
+
+
+@Service("service_encrypt_decrypt")
+public class EncryptDecryptServiceImpl implements IEncyrptDecryptService{
 	 
-    private static SecretKeySpec secretKey;
-    private static byte[] key;
+    private  SecretKeySpec secretKey;
+    private  byte[] key;
  
-    public static void setKey(String myKey)
+    public void setKey(String myKey) throws OnlineBankingException
     {
         MessageDigest sha = null;
         try {
@@ -33,7 +39,7 @@ public class EncryptDecrypt {
         }
     }
  
-    public static String encrypt(String strToEncrypt, String secret)
+    public String encrypt(String strToEncrypt, String secret) throws OnlineBankingException
     {
         try
         {
@@ -50,7 +56,7 @@ public class EncryptDecrypt {
         return null;
     }
  
-    public static String decrypt(String strToDecrypt, String secret)
+    public String decrypt(String strToDecrypt, String secret) throws OnlineBankingException
     {
         try
         {
@@ -58,7 +64,7 @@ public class EncryptDecrypt {
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING"); // Specify password based encryption standard version 1.5
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
             return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
-            // The doFinal method does actual encryption or decryption.
+            
         }
         catch (Exception e)
         {
@@ -67,16 +73,5 @@ public class EncryptDecrypt {
         return null;
     }
     
-    /*public static void main(String[] args)
-    {
-        final String secretKey = "jpMorgan@123";
-         
-        String originalString = "JP Morgan";
-        String encryptedString = AES.encrypt(originalString, secretKey) ;
-        String decryptedString = AES.decrypt(encryptedString, secretKey) ;
-         
-        System.out.println(originalString);
-        System.out.println(encryptedString);
-        System.out.println(decryptedString);
-    }*/
+   
 }

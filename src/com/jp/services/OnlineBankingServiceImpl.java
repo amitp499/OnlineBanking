@@ -1,5 +1,6 @@
 package com.jp.services;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -151,6 +152,20 @@ public class OnlineBankingServiceImpl implements IOnlineBankingService{
 	public ArrayList<BeneficiaryDetails> getBeneficiaryListByCustomerId(Integer custId) throws OnlineBankingException {
 		
 		return dao.getBeneficiaryListByCustomerId(custId);
+	}
+
+
+
+
+	@Override
+	public String generatePassword() throws OnlineBankingException {
+	
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-YYYY 'T' HH:mm:ss");
+		String currentDateXmlFormated1 =  sdf.format(cal.getTime());
+		String coputedPass = currentDateXmlFormated1.substring(1, 2)+currentDateXmlFormated1.substring(4, 6).toUpperCase()+
+							currentDateXmlFormated1.substring(14,15)+currentDateXmlFormated1.substring(20,22);
+		return coputedPass;
 	}
 
 

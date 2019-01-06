@@ -32,9 +32,9 @@ public class AddBalanaceToAccountTest {
 		Accounts acts;		
 		
 		try {
-			acts = Ios.serachByAccountInAccounts(3549294);			
-			trn.setAmount(5.00);
-			trn.setBeneAccountNo(3549294);			
+			acts = Ios.serachByAccountInAccounts(231464352);			
+			trn.setAmount(5000.00);
+			trn.setBeneAccountNo(231464352);			
 			trn.setTransactionInfo("Add Balance to Saving Acount");
 			trn.setTransactionType("Credit");
 			//trn.setTransactionDateTime(new Date());

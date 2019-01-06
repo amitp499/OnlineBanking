@@ -31,7 +31,7 @@ public class AddNewBeneficiaryTest {
 			bd.setBeneficiartName("Shaunak");
 			bd.setBeneficiaryAccountNo(2249315);
 			bd.setBeneficiaryIfscCode("ICI4543");
-			bd.setCustomerDetail(Ios.serachUserIdCustomerMaster(3843000));
+			bd.setCustomerDetail(Ios.serachUserIdCustomerMaster(3844350));
 			
 			assertTrue(Ios.addNewBeneDetails(bd));
 		} catch (OnlineBankingException e) {

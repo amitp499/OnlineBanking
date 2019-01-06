@@ -27,7 +27,7 @@ public class CustomerDetail implements Serializable{
 	private static final long serialVersionUID = 6471386886575838136L;
 	private Integer customerId;
 	private String customerName;	
-	private Integer customerMobileNo;
+	private Long customerMobileNo;
 	private String customerGender;
 	private String customerEmail;
 	private String customerDOB;
@@ -36,7 +36,7 @@ public class CustomerDetail implements Serializable{
 	private String customerState;
 	private String customerCountry;
 	private String customerBranch;
-	private Integer customerAadharId;
+	private Long customerAadharId;
 	private String customerPanCard;
 	private String customerPhotoPath;
 	private String customerSignaturePath;
@@ -140,13 +140,13 @@ public class CustomerDetail implements Serializable{
 
 
 	@Column(name="CUSTOMER_MOBLILENO")
-	public Integer getCustomerMobileNo() {
+	public Long getCustomerMobileNo() {
 		return customerMobileNo;
 	}
 
 
 
-	public void setCustomerMobileNo(Integer customerMobileNo) {
+	public void setCustomerMobileNo(Long customerMobileNo) {
 		this.customerMobileNo = customerMobileNo;
 	}
 
@@ -248,13 +248,13 @@ public class CustomerDetail implements Serializable{
 
 
 	@Column(name="CUSTOMER_AADHARID")
-	public Integer getCustomerAadharId() {
+	public Long getCustomerAadharId() {
 		return customerAadharId;
 	}
 
 	
 
-	public void setCustomerAadharId(Integer customerAadharId) {
+	public void setCustomerAadharId(Long customerAadharId) {
 		this.customerAadharId = customerAadharId;
 	}
 
