@@ -33,7 +33,6 @@ public abstract class Accounts implements Serializable{
 	private static final long serialVersionUID = 4059544898404831586L;
 
 	
-	
 	private Integer accountNo;
 	
 	private Double accountBalance;	

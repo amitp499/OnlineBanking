@@ -23,9 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jp.entities.Accounts;
 import com.jp.entities.BeneficiaryDetails;
 import com.jp.entities.CustomerDetail;
+import com.jp.entities.CustomerMaster;
 import com.jp.entities.SavingsAccount;
 import com.jp.entities.Transactions;
 import com.jp.exceptions.OnlineBankingException;
+import com.jp.services.IEncyrptDecryptService;
+import com.jp.services.IOnlineBankingEmailService;
 import com.jp.services.IOnlineBankingService;
 
 @RestController
@@ -34,6 +37,14 @@ public class WebController {
 	@Autowired
 	@Qualifier("service")
 	private IOnlineBankingService ioS;
+	
+	@Autowired
+	@Qualifier("email_service")
+	private IOnlineBankingEmailService Ioes;
+	
+	@Autowired
+	@Qualifier("service_encrypt_decrypt")
+	private IEncyrptDecryptService Ieds;
 	
 	@RequestMapping("HomePage.in")
 	public String displayHomePage(){
@@ -116,8 +127,54 @@ public class WebController {
 		
 	}
 	
+	@RequestMapping(value = "/addNewCustomer", method = RequestMethod.POST, headers = "Accept=application/json")		
+	public boolean addNewCustomer(@RequestBody CustomerDetail cd){
+						
+		boolean addCustomerFlag=false;
+		boolean addNewCust=false;
+		boolean sendEmail=false;
+				System.out.println(cd);
+		CustomerMaster cm = new CustomerMaster();
+		
+		try {						
+				
+			if (cd!=null){
+				
+				cm.setRole("customer");
+				cd.setCustomerSignaturePath("customerSignaturePath");
+				cd.setCustomerPhotoPath("customerPhotoPath");
+				System.out.println(cd);
+				
+				String encryptedPassword = Ieds.encrypt(ioS.generatePassword(), cd.getCustomerAadharId().toString());
+
+				cm.setCustPassword(encryptedPassword);
+				
+				cm.setCustomerdetail(cd);
+				cd.setCustomermaster(cm);
+								 					
+				addNewCust = ioS.registerNewCustoer(cm);
+				
+				String decryptedPassword = Ieds.decrypt(cm.getCustPassword(), cd.getCustomerAadharId().toString());
+					
+				sendEmail=Ioes.sendCustomerRegistrationEmail(cd.getCustomerEmail(), cm.getLoginId(), decryptedPassword);
+			}
+			
+			if (addNewCust && sendEmail){
+				addCustomerFlag=true;
+			}
+			
+			
+		} catch (OnlineBankingException e) {
+			
+			e.printStackTrace();
+		}
+			
+		return addCustomerFlag;
+		
+	}
+	
 	@RequestMapping(value = "/addNewAccount/{accountType}/{customerId}", method = RequestMethod.POST, headers = "Accept=application/json")		
-	public boolean addNewAccount(@PathVariable("accountType") String accountType, @PathVariable("customerId") Integer customerId){
+	public boolean addNewAccount_Old(@PathVariable("accountType") String accountType, @PathVariable("customerId") Integer customerId){
 						
 		boolean addAccountFlag=false;
 		

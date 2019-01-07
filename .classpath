@@ -22,6 +22,6 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/lib/javamail-1.4.5/mail.jar"/>
+	<classpathentry kind="lib" path="D:/Amit/workspace_FinalProject/OnlineBanking/WebContent/WEB-INF/lib/mail.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
