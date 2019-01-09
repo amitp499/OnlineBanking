@@ -43,4 +43,8 @@ public interface IOnlineBankingService {
 	public ArrayList<BeneficiaryDetails> getBeneficiaryListByCustomerId(Integer custId) throws OnlineBankingException;
 	
 	public String generatePassword() throws OnlineBankingException;
+	
+	public Integer doLogin(Integer loginId, String pwd ) throws OnlineBankingException;
+	
+	public Accounts serachByCustIdInAccounts(Integer acctNo) throws OnlineBankingException;
 }

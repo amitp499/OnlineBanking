@@ -44,7 +44,8 @@ public class EncryptDecryptServiceImpl implements IEncyrptDecryptService{
         try
         {
             setKey(secret);
-            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding"); 
+            //Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding"); 
+            Cipher cipher = Cipher.getInstance("AES");
             // Other types of Cipher instances: CFB/OFB etc.
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
             return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes("UTF-8")));
@@ -61,7 +62,7 @@ public class EncryptDecryptServiceImpl implements IEncyrptDecryptService{
         try
         {
             setKey(secret);
-            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING"); // Specify password based encryption standard version 1.5
+            Cipher cipher = Cipher.getInstance("AES"); // Specify password based encryption standard version 1.5
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
             return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
             

@@ -56,7 +56,7 @@
         
         create table BENEFICIARY_DETAILS_TBL (
         CUSTOMER_ID number(10) ,              
-        BENEFICIARY_IFSC_CODE varchar2(10) unique,
+        BENEFICIARY_IFSC_CODE varchar2(10) not null,
         BENEFICIARY_ACCOUNTNO number(10) not null,
         BENEFICIARY_NAME varchar2(30) not null,
         BENEFICIARY_ID number(10) primary key,
@@ -78,6 +78,9 @@
         );
         commit;
         
+        update  ACCOUNTS_TBL
+        set Account_Balance =500 where  customer_id = 3845926
+        commit;
         
         select * from CUSTOMER_MASTER_TBL;
         desc CUSTOMER_MASTER_TBL;
@@ -89,15 +92,15 @@
         desc TRANSACTION_TBL;
         
        
-    -- drop table CUSTOMER_MASTER_TBL;        
-     --drop table TRANSACTION_TBL;
-     --drop table BENEFICIARY_DETAILS_TBL;
-     --drop table ACCOUNTS_TBL;
-     --drop table CUSTOMER_DETAILS_TBL;
+        drop table CUSTOMER_MASTER_TBL;        
+        drop table TRANSACTION_TBL;
+        drop table BENEFICIARY_DETAILS_TBL;
+        drop table ACCOUNTS_TBL;
+        drop table CUSTOMER_DETAILS_TBL;
         commit;
-        
+       Select *  from ACCOUNTS_TBL where customer_id =3845926;
         select account_no_seq.nextval from dual
-        delete from ACCOUNTS_TBL where customer_id ='3844125';
+        delete from ACCOUNTS_TBL where customer_id ='3845926';
         rollback;
         commit;
         --update CUSTOMER_DETAILS_TBL set customer_name='Amit Pandey' where customer_id='3844425';
@@ -109,6 +112,10 @@
         update CUSTOMER_DETAILS_TBL set customer_signature_path='assets\images\rash.png' where customer_id='3843000';
         commit;
         
+        
+        delete from CUSTOMER_DETAILS_TBL where customer_id='3847276';
+        delete from CUSTOMER_MASTER_TBL where login_id='39302616';
+        commit;
    
    
         

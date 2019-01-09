@@ -64,7 +64,14 @@ public class OnlineBankingDaoImpl implements IOnlineBankingDao{
 	@Override
 	public CustomerDetail serachUserIdCustomerMaster(Integer userId) throws OnlineBankingException {
 		
-		return entityManager.find(CustomerDetail.class, userId);
+		Query query = entityManager.createQuery("Select c from Customer_Detail c where c.customerId = :userId");
+		query.setParameter("userId",userId);
+		CustomerDetail act = (CustomerDetail) query.getSingleResult();
+		
+		//return entityManager.find(Accounts.class, acctNo);
+			return act;
+		
+		//return entityManager.find(CustomerDetail.class, userId);
 	}
 
 	@Override
@@ -101,6 +108,28 @@ public class OnlineBankingDaoImpl implements IOnlineBankingDao{
 		return addBalFlag;
 	}
 
+	/*@Override
+	public Accounts serachByAccountInAccounts_Old(Integer acctNo) throws OnlineBankingException {
+		
+		Query query = entityManager.createQuery("Select e from Accounts e where e.accountNo = :acctNo");
+		query.setParameter("acctNo",acctNo);
+			Accounts act = (Accounts) query.getSingleResult();
+		
+		//return entityManager.find(Accounts.class, acctNo);
+			return act;
+	}*/
+	
+	@Override
+	public Accounts serachByCustIdInAccounts(Integer acctNo) throws OnlineBankingException {
+		
+		Query query = entityManager.createQuery("Select e from Accounts e where e.customerDetail.customerId = :acctNo");
+		query.setParameter("acctNo",acctNo);
+			Accounts act = (Accounts) query.getSingleResult();
+		
+		//return entityManager.find(Accounts.class, acctNo);
+			return act;
+	}
+	
 	@Override
 	public Accounts serachByAccountInAccounts(Integer acctNo) throws OnlineBankingException {
 		
@@ -208,6 +237,14 @@ public class OnlineBankingDaoImpl implements IOnlineBankingDao{
 
 		return beneList;
 	}
+	
+	@Override
+	public CustomerMaster doLogin(Integer loginId) throws OnlineBankingException {
+		CustomerMaster loginCustomer =null;
+		loginCustomer=	entityManager.find(CustomerMaster.class, loginId);		
+		return loginCustomer;
+	}
+
 
 	
 		

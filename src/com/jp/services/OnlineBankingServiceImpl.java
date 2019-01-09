@@ -27,6 +27,10 @@ public class OnlineBankingServiceImpl implements IOnlineBankingService{
 	
 	private IOnlineBankingDao dao;
 	
+	@Autowired
+	@Qualifier("service_encrypt_decrypt")
+	private IEncyrptDecryptService encDecy;
+	
 	
 	
 	@Autowired
@@ -167,6 +171,34 @@ public class OnlineBankingServiceImpl implements IOnlineBankingService{
 							currentDateXmlFormated1.substring(14,15)+currentDateXmlFormated1.substring(20,22);
 		return coputedPass;
 	}
+	
+	@Override
+	public Integer doLogin(Integer loginId, String pwd) throws OnlineBankingException {
+		CustomerMaster customer=null;
+		Integer custId=0;
+		customer =dao.doLogin(loginId);
+		if(customer!=null){
+			CustomerDetail custDetails = customer.getCustomerdetail();
+			String custAadharNo = custDetails.getCustomerAadharId().toString();			
+			String decPwd= encDecy.decrypt(customer.getCustPassword(), custAadharNo);
+			if(decPwd.equals(pwd)){
+				return customer.getCustomerdetail().getCustomerId();
+			}else{
+				return custId;
+				}
+		}
+		return custId;
+	}
+
+
+
+
+	@Override
+	public Accounts serachByCustIdInAccounts(Integer acctNo) throws OnlineBankingException {
+		// TODO Auto-generated method stub
+		return dao.serachByCustIdInAccounts(acctNo);
+	}
+
 
 
 

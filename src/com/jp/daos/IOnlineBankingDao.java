@@ -30,6 +30,8 @@ public interface IOnlineBankingDao {
 	
 	public Accounts serachByAccountInAccounts(Integer acctNo) throws OnlineBankingException;
 	
+	public Accounts serachByCustIdInAccounts(Integer acctNo) throws OnlineBankingException;
+	
 	public Double getAccountBalance(Integer acctNo) throws OnlineBankingException;
 	
 	public boolean updateBalanceInAccounts(Accounts acct) throws OnlineBankingException;
@@ -45,6 +47,8 @@ public interface IOnlineBankingDao {
 	public ArrayList<Transactions> viewAccountStatement(Integer accountNo,String fromDate, String toDate) throws OnlineBankingException;
 	
 	public ArrayList<BeneficiaryDetails> getBeneficiaryListByCustomerId(Integer custId) throws OnlineBankingException;
+	
+	public CustomerMaster doLogin(Integer loginId ) throws OnlineBankingException;
 	
 	
 

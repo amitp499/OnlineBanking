@@ -9,6 +9,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -52,13 +55,17 @@ public class WebController {
 		return "homePage";
 	}
 	
+	//private Map<Integer,List<String>> session= new HashMap<>();
+	
+	
 	
 	@RequestMapping(value = "/viewAccountSummary/{accountNo}", method = RequestMethod.GET, headers = "Accept=application/json")
 	public Accounts customerRegistration(@PathVariable("accountNo") Integer accountNo){
 		
 		Accounts act=null;
 		try {
-			 act =   ioS.serachByAccountInAccounts(accountNo);
+			// act =   ioS.serachByAccountInAccounts(accountNo);
+			 act =   ioS.serachByCustIdInAccounts(accountNo);
 			
 		} catch (OnlineBankingException e) {
 			
@@ -184,7 +191,7 @@ public class WebController {
 				
 				Accounts sb = new SavingsAccount();		
 				
-				sb.setAccountBalance(0.00);
+				sb.setAccountBalance(5000.00);
 				sb.setCustomerDetail(ioS.serachUserIdCustomerMaster(customerId));
 				
 				addAccountFlag = ioS.openAccount(sb);
@@ -205,13 +212,14 @@ public class WebController {
 			@PathVariable("trComments") String trComments,
 			@PathVariable("beneActNo") Integer beneActNo
 			){
-					
+		
+			
 		boolean frmBalUpdate=false;
 		boolean frmAddBal=false;
 		boolean frmTrnSuccess=true;
 		
-		boolean toBalUpdate=false;
-		boolean toAddBal=false;
+		boolean toBalUpdate=true;
+		boolean toAddBal=true;
 		boolean toTrnSuccess=true;
 		
 		boolean TrnSuccess=false;
@@ -224,6 +232,7 @@ public class WebController {
 		Accounts toActs;				
 		
 		try {
+			
 			
 		
 			 beneD = ioS.serachByBeneAccount(beneActNo);
@@ -261,6 +270,7 @@ public class WebController {
 			
 			
 			//--------------------------------------------------		
+			
 			if (beneD.getBeneficiaryIfscCode().substring(0, 3).equalsIgnoreCase("ONB") && frmTrnSuccess ){
 				
 				toActs = ioS.serachByAccountInAccounts(beneActNo);	//account to credit
@@ -322,4 +332,22 @@ public class WebController {
 		return beneList;
 		
 	}
+	
+	@RequestMapping(value ="/login/{loginId}/{custPassword}", method=RequestMethod.GET, headers = "Accept=application/json")
+	public int login(@PathVariable("loginId") Integer id, @PathVariable("custPassword") String pwd){
+		int custId=-1;
+		
+		CustomerMaster cust=null;
+		try {
+			custId = ioS.doLogin(id, pwd);
+			//session.put(custId, new ArrayList<String>());
+		} catch (OnlineBankingException e) {
+			
+			e.printStackTrace();
+		}
+		return custId;
+	}
+
+
+
 }
