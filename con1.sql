@@ -92,12 +92,12 @@
         desc TRANSACTION_TBL;
         
        
-        drop table CUSTOMER_MASTER_TBL;        
-        drop table TRANSACTION_TBL;
-        drop table BENEFICIARY_DETAILS_TBL;
-        drop table ACCOUNTS_TBL;
-        drop table CUSTOMER_DETAILS_TBL;
-        commit;
+        --drop table CUSTOMER_MASTER_TBL;        
+        --drop table TRANSACTION_TBL;
+        --drop table BENEFICIARY_DETAILS_TBL;
+        --drop table ACCOUNTS_TBL;
+        --drop table CUSTOMER_DETAILS_TBL;
+        --commit;
        Select *  from ACCOUNTS_TBL where customer_id =3845926;
         select account_no_seq.nextval from dual
         delete from ACCOUNTS_TBL where customer_id ='3845926';
